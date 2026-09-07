@@ -1,120 +1,134 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="theme-color" content="#0f1420" />
-    <title>Next Stop — a quiz for the ride</title>
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='44' fill='%23f5b342'/><rect x='14' y='41' width='72' height='18' rx='4' fill='%230f1420'/></svg>"
-    />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div id="app">
-      <header class="masthead">
-        <svg class="roundel" viewBox="0 0 100 100" aria-hidden="true">
-          <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="14" />
-          <rect x="6" y="41" width="88" height="18" rx="3" fill="currentColor" />
-        </svg>
-        <div class="masthead-text">
-          <h1>Next Stop</h1>
-          <p class="subtitle">A quiz for the two minutes before your stop</p>
-        </div>
-      </header>
-
-      <!-- ============ start screen ============ -->
-      <section id="start" class="screen">
-        <h2 class="section-label">Choose a line</h2>
-        <div id="deck-list" class="deck-list" role="group" aria-label="Decks"></div>
-
-        <div class="row">
-          <div>
-            <h2 class="section-label">Stops</h2>
-            <div id="size-list" class="segmented" role="group" aria-label="Questions per round">
-              <button type="button" class="seg" data-size="5">5</button>
-              <button type="button" class="seg" data-size="10" aria-pressed="true">10</button>
-              <button type="button" class="seg" data-size="15">15</button>
-            </div>
-          </div>
-          <button id="start-round" type="button" class="btn primary big">Board <span class="arrow" aria-hidden="true">→</span></button>
-        </div>
-
-        <p id="deck-info" class="deck-info">Loading decks…</p>
-
-        <div class="own-deck">
-          <button id="open-file" type="button" class="btn ghost">Open your own deck…</button>
-          <input id="deck-file" type="file" accept=".md,.txt,text/markdown,text/plain" hidden />
-          <span class="hint">any markdown file · stays on your device</span>
-        </div>
-
-        <p class="how">
-          <strong>How to play.</strong> Pick an answer with a tap, the number keys, or the arrow
-          keys and Enter. Nothing is timed. Whatever you miss comes back at the end.
-        </p>
-      </section>
-
-      <!-- ============ play screen ============ -->
-      <section id="play" class="screen" hidden>
-        <div class="line-strip" aria-hidden="true">
-          <div id="stations" class="stations"></div>
-        </div>
-        <div class="status">
-          <div id="q-label" class="q-label">Stop 1 of 10</div>
-          <div class="status-right">
-            <span id="streak" class="streak"></span>
-            <span id="score" class="score">0 right</span>
-          </div>
-        </div>
-
-        <main id="question" class="question" aria-live="polite">
-          <p id="prompt" class="prompt"></p>
-          <div id="choices" class="choices"></div>
-          <div class="after">
-            <p id="feedback" class="feedback"></p>
-            <p id="note" class="note" hidden></p>
-          </div>
-        </main>
-
-        <div class="controls">
-          <button id="next" type="button" class="btn primary" hidden>Next stop <span class="arrow" aria-hidden="true">→</span></button>
-          <button id="quit" type="button" class="btn ghost">Leave</button>
-        </div>
-      </section>
-
-      <footer>
-        Decks are plain markdown files. Write your own in any text editor — see the README.
-      </footer>
-
-      <!-- ============ results ============ -->
-      <div id="overlay" hidden>
-        <div class="overlay-card" role="dialog" aria-labelledby="overlay-title">
-          <div class="ring-wrap">
-            <svg class="ring" viewBox="0 0 120 120" aria-hidden="true">
-              <circle class="ring-track" cx="60" cy="60" r="52" />
-              <circle id="ring-fill" class="ring-fill" cx="60" cy="60" r="52" />
-            </svg>
-            <div class="ring-label">
-              <span id="ring-pct" class="ring-pct">0%</span>
-            </div>
-          </div>
-          <h2 id="overlay-title"></h2>
-          <dl class="stats">
-            <div><dt>Right</dt><dd id="stat-score">0 / 10</dd></div>
-            <div><dt>Best streak</dt><dd id="stat-streak">0</dd></div>
-            <div><dt>Time</dt><dd id="stat-time">0:00</dd></div>
-          </dl>
-          <p id="best" class="best"></p>
-          <div class="overlay-actions">
-            <button id="retry" type="button" class="btn primary">Retry the missed</button>
-            <button id="play-again" type="button" class="btn">Ride again</button>
-            <button id="to-menu" type="button" class="btn ghost">Change line</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script type="module" src="./src/main.js"></script>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8f7f2">
+<meta name="description" content="Turn waiting time into discovery. Bite-sized quizzes, six curious topics, and a journey that's all yours.">
+<title>Next Stop — a little wiser</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='28' fill='%23f5d45e'/><text x='12' y='75' font-size='85' fill='%23232925'>⇄</text></svg>">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<div id="app">
+<header class="masthead"><a class="brand" href="./" aria-label="Next Stop home"><span class="brand-mark" aria-hidden="true">⇄</span>nextstop<span class="brand-dot">.</span></a><span class="brand-caption">A LITTLE WISER. EVERY RIDE.</span><button id="journey-link" class="nav-link" type="button">Your journey <span aria-hidden="true">↗</span></button>
+</header>
+<main>
+<section id="start" class="screen" aria-label="Choose your quiz">
+<div class="hero">
+<div class="hero-copy">
+<p class="eyebrow"><span class="live-dot"></span> MAKE A LITTLE TIME FOR CURIOSITY</p>
+<h1>Small waits.<br>Big <span class="underlined">discoveries.</span>
+</h1>
+<p class="hero-description">A few questions. A fresh perspective.<br>Turn your in-between moments into little wins.</p><button id="surprise" class="btn ink" disabled>Take a quick trip <span aria-hidden="true">↗</span></button><span class="hero-hint">5 questions · a surprise topic</span>
+</div>
+<div class="hero-art"><img src="./assets/journey.svg" alt="A yellow bus on a winding route through a playful landscape of hills, a globe and stars." width="510" height="360"><span class="art-caption">NEXT STOP: SOMETHING NEW</span>
+</div>
+</div>
+<div id="journey" class="journey-bar" tabindex="-1" aria-label="Your journey so far">
+<div class="journey-intro"><span class="mini-icon" aria-hidden="true">↗</span>
+<div><strong>Your little wins add up.</strong><span id="journey-caption">Every discovery is a step forward.</span>
+</div>
+</div>
+<div class="journey-stat"><strong id="total-xp">0</strong><span>discovery XP</span>
+</div>
+<div class="journey-stat"><strong id="total-collected">0</strong><span>answers collected</span>
+</div>
+<div class="journey-stat"><strong id="total-rides">0</strong><span>trips completed</span>
+</div>
+</div>
+<div class="explore-layout">
+<div class="topics">
+<div class="section-heading">
+<div>
+<p class="eyebrow">FOLLOW YOUR CURIOSITY</p>
+<h2>Where to?</h2>
+</div><span id="topic-count" class="topic-count">6 topics. Endless little discoveries.</span>
+</div>
+<div id="deck-list" class="deck-list" role="group" aria-label="Quiz topics">
+</div>
+<div class="own-deck"><span>Something of your own?</span><button id="open-file" type="button" class="text-button">Import a question deck <span aria-hidden="true">↗</span></button><input id="deck-file" type="file" accept=".md,.txt,text/markdown,text/plain" hidden>
+</div>
+</div>
+<aside class="trip-panel" aria-label="Plan your quiz">
+<div class="ticket-heading"><span class="eyebrow">YOUR NEXT TRIP</span><span aria-hidden="true">↗</span>
+</div>
+<h2 id="selected-title">Finding your next stop…</h2>
+<p id="deck-info">Loading topics…</p>
+<div class="ticket-divider">
+</div><span class="field-label" id="size-label">How long have you got?</span>
+<div id="size-list" class="segmented" role="group" aria-labelledby="size-label"><button type="button" class="seg" data-size="5" aria-pressed="true"><strong>5</strong><span>Quick</span></button><button type="button" class="seg" data-size="10" aria-pressed="false"><strong>10</strong><span>Classic</span></button><button type="button" class="seg" data-size="15" aria-pressed="false"><strong>15</strong><span>Scenic</span></button>
+</div>
+<p class="time-hint" id="time-hint">5 questions · your own pace</p><button id="start-round" type="button" class="btn primary big" disabled>Let's go <span aria-hidden="true">→</span></button>
+<p class="no-rush"><span aria-hidden="true">◷</span> No timer. No pressure. Just play.</p>
+<div class="daily-goal">
+<div><strong>A tiny daily goal</strong><span id="daily-count">0 / 5</span>
+</div>
+<div class="progress-track"><span id="daily-fill"></span>
+</div>
+<p id="daily-caption">Answer 5 questions. Give your curiosity a minute.</p>
+</div>
+</aside>
+</div>
+<p id="load-error" class="error-message" role="alert" hidden>
+</p>
+<p id="storage-warning" class="error-message" role="status" hidden>Browser storage is unavailable. You can still play, but progress will only last for this visit.</p>
+</section>
+<section id="play" class="screen play-screen" aria-label="Quiz round" hidden>
+<div class="play-heading"><button id="quit" type="button" class="text-button">← Back to topics</button><span id="play-topic" class="topic-pill"></span><span class="play-pace">TAKE YOUR TIME</span>
+</div>
+<div class="line-strip" aria-hidden="true">
+<div id="stations" class="stations">
+</div>
+</div>
+<div class="status"><span id="q-label" class="eyebrow">STOP 1 OF 5</span>
+<div class="status-right"><span id="streak" class="streak"></span><span id="score" class="score">0 right</span>
+</div>
+</div>
+<div id="question" class="question">
+<p class="question-kicker">A LITTLE SOMETHING TO WONDER ABOUT</p>
+<h1 id="prompt" class="prompt" tabindex="-1">
+</h1>
+<div id="choices" class="choices">
+</div>
+<div class="after" aria-live="polite" aria-atomic="true">
+<p id="feedback" class="feedback">
+</p>
+<p id="note" class="note" hidden>
+</p>
+</div>
+</div>
+<div class="controls"><span class="keyboard-hint">Tap an answer or use keys 1–4</span><button id="next" type="button" class="btn primary" hidden>Next stop →</button>
+</div>
+</section>
+</main>
+<footer><span><span class="footer-mark" aria-hidden="true">⇄</span> A little wiser than when you arrived.</span><span>Made for the in-between. <span class="footer-dot">•</span> Progress stays on this device.</span>
+</footer>
+</div>
+<div id="overlay" hidden>
+<div class="overlay-card" role="dialog" aria-modal="true" aria-labelledby="overlay-title" aria-describedby="result-message">
+<p class="eyebrow">A LITTLE FURTHER THAN BEFORE</p>
+<div class="ring-wrap"><svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="ring-track" cx="60" cy="60" r="52"/><circle id="ring-fill" class="ring-fill" cx="60" cy="60" r="52"/></svg>
+<div class="ring-label"><span id="ring-pct">0%</span><span>correct</span>
+</div>
+</div>
+<h2 id="overlay-title">Nice little trip.</h2>
+<p id="result-message">Every question takes you somewhere.</p>
+<div id="earned-xp" class="earned-xp">
+</div><dl class="stats">
+<div><dt>Correct</dt><dd id="stat-score">0 / 5</dd>
+</div>
+<div><dt>Best streak</dt><dd id="stat-streak">0</dd>
+</div>
+<div><dt>Your time</dt><dd id="stat-time">0:00</dd>
+</div></dl>
+<p id="best" class="best">
+</p>
+<div class="overlay-actions"><button id="retry" type="button" class="btn primary">Revisit missed questions</button><button id="play-again" type="button" class="btn ink">One more trip →</button><button id="to-menu" type="button" class="text-button">Back to topics</button>
+</div>
+</div>
+</div>
+<script type="module" src="./src/main.js">
+</script>
+</body>
 </html>

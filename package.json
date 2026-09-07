@@ -1,0 +1,6 @@
+{
+  "name": "nextstop-quiz",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test", "start": "node serve.js", "package": "node generate-zip.js" }
+}

@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.dirname(fileURLToPath(import.meta.url));
 const outFile = path.join(root, 'nextstop-web.zip');
 // Only the app files are packed — never tests, notes, or tooling in this folder.
-const APP_ENTRIES = ['index.html', 'style.css', 'src', 'decks'];
+const APP_ENTRIES = ['index.html', 'style.css', 'src', 'decks', 'assets', 'QUESTION-SOURCES.md'];
 
 const crcTable = new Uint32Array(256);
 for (let n = 0; n < 256; n++) {

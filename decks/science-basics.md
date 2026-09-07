@@ -27,7 +27,7 @@ Everyday science from the periodic table to the solar system.
 - [ ] An electron
 - [ ] A molecule
 - [ ] A photon
-> The nucleus holds the protons and neutrons; electrons move around it.
+> The nucleus contains protons and usually neutrons; electrons occupy the space around it.
 
 ## Which planet is closest to the Sun?
 - [x] Mercury
@@ -48,7 +48,7 @@ Everyday science from the periodic table to the solar system.
 - [ ] Ribosome
 - [ ] Cell wall
 
-## What is the hardest naturally occurring material?
+## Which mineral ranks highest on the Mohs hardness scale?
 - [x] Diamond
 - [ ] Steel
 - [ ] Quartz
@@ -81,3 +81,129 @@ Everyday science from the periodic table to the solar system.
 - [ ] Oxygen
 - [ ] Carbon
 > It has one proton, which is what the atomic number counts.
+
+## Which force keeps your feet on the ground?
+- [x] Gravity
+- [ ] Magnetism
+- [ ] Friction
+- [ ] Buoyancy
+> Gravity attracts objects with mass toward one another.
+
+## What kind of electric charge does an electron carry?
+- [x] Negative
+- [ ] Positive
+- [ ] Neutral
+- [ ] It changes every second
+> An electron is negative; a proton is positive.
+
+## An ice cube melts. What has changed?
+- [x] Its state of matter
+- [ ] Its chemical formula
+- [ ] Its elements
+- [ ] Its number of protons
+> Melting changes solid water into liquid water; it is still H2O.
+
+## Which tool measures temperature?
+- [x] Thermometer
+- [ ] Barometer
+- [ ] Compass
+- [ ] Anemometer
+> A thermometer measures temperature; a barometer measures air pressure.
+
+## Which material is usually the best electrical conductor here?
+- [x] Copper
+- [ ] Rubber
+- [ ] Glass
+- [ ] Dry wood
+> Copper lets electric charge move easily, which makes it useful in wires.
+
+## What is the smallest unit of an element that retains its chemical identity?
+- [x] An atom
+- [ ] A cell
+- [ ] A crystal
+- [ ] A drop
+> Atoms contain a nucleus and electrons.
+
+## What does a prism separate white light into?
+- [x] A spectrum of colors
+- [ ] Sound waves
+- [ ] Electric charges
+- [ ] Water droplets
+> Different wavelengths bend by different amounts as they pass through a prism.
+
+## What is the change from a gas to a liquid called?
+- [x] Condensation
+- [ ] Melting
+- [ ] Freezing
+- [ ] Sublimation
+> Condensation forms the droplets on the outside of a cold glass.
+
+## Which blood cells carry most of the oxygen in your blood?
+- [x] Red blood cells
+- [ ] White blood cells
+- [ ] Platelets
+- [ ] Nerve cells
+> Hemoglobin inside red blood cells binds oxygen.
+
+## Which organ pumps blood around the body?
+- [x] Heart
+- [ ] Liver
+- [ ] Stomach
+- [ ] Kidney
+> The heart is a muscular pump.
+
+## Which part of a plant usually absorbs water from the soil?
+- [x] Roots
+- [ ] Petals
+- [ ] Fruit
+- [ ] Seeds
+> Water enters through roots and travels to the rest of the plant.
+
+## Which simple machine is a seesaw an example of?
+- [x] Lever
+- [ ] Pulley
+- [ ] Screw
+- [ ] Wedge
+> A lever pivots around a support called a fulcrum.
+
+## What do we call animals that eat both plants and animals?
+- [x] Omnivores
+- [ ] Herbivores
+- [ ] Carnivores
+- [ ] Pollinators
+> The name describes a diet that includes both plant and animal food.
+
+## Which unit measures electrical resistance?
+- [x] Ohm
+- [ ] Watt
+- [ ] Kelvin
+- [ ] Meter
+> Resistance describes how strongly a material opposes electric current.
+
+## How many sides does a hexagon have?
+- [x] Six
+- [ ] Five
+- [ ] Seven
+- [ ] Eight
+> The prefix hex- means six.
+
+## What is the chemical symbol for iron?
+- [x] Fe
+- [ ] Ir
+- [ ] I
+- [ ] In
+> Fe comes from ferrum, the Latin name for iron.
+
+## What do sound waves need in order to travel?
+- [x] A medium such as air, water, or a solid
+- [ ] Sunlight
+- [ ] A vacuum
+- [ ] A magnetic north pole
+> Sound is a mechanical vibration and cannot travel through an empty vacuum.
+
+## What is the process of a solid changing directly into a gas called?
+- [x] Sublimation
+- [ ] Condensation
+- [ ] Melting
+- [ ] Freezing
+> Dry ice changes directly from solid carbon dioxide to gas.

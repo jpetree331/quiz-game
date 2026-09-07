@@ -1,7 +1,7 @@
 # Next Stop — a quiz for the ride
 
 A multiple-choice quiz you can finish in the two minutes before your stop.
-Pick a deck, answer ten questions, see what you missed, try those again.
+Pick a topic, answer five questions, see what you discovered, try the missed ones again.
 Runs in any browser — a phone, a Chromebook, or a TV with a remote.
 
 Decks are **plain markdown files**. Anyone who can type can write one.
@@ -26,8 +26,17 @@ the end.
 **Retry** — When the round ends, every question you missed can be replayed as a
 short extra round. Keep retrying until there is nothing left to miss.
 
-**Best score** — The best percentage per deck is remembered in the browser
-(nothing is sent anywhere).
+**Progress** — Each new correct answer earns 10 discovery XP and fills the topic's
+collection bar. Progress saves after every answer, including unfinished trips.
+New rounds favor unseen questions, then previously missed ones, then collected ones.
+Answer five questions to complete the small daily goal (based on your device's date).
+
+**Best score** — The best percentage per topic is remembered in the browser.
+Practice trips do not replace full-trip best scores or add to completed trip counts.
+Existing best scores from the original version are still recognized. No data is sent
+anywhere. If browser storage is blocked or full, a notice explains that progress
+only lasts for the current visit. Imported decks must be reopened after a reload;
+their progress is remembered when the same file and questions are reopened.
 
 ## Features
 
@@ -35,9 +44,14 @@ short extra round. Keep retrying until there is nothing left to miss.
   TV remote or a keyboard, no mouse required
 - **Bring your own deck** — open any `.md` file from your device with the file
   picker on the start screen
-- **Three bundled decks** — science basics, world capitals, German first words
-- Transit-signage look: deck "lines" as ticket cards, a station strip that lights
-  each stop green or red as you answer, a score ring at the end of the line
+- **Six topics, 180 questions** — everyday science, world capitals, nature,
+  space, arts and words, and beginner German; 30 questions per topic
+- Warm cream-and-ink design, original SVG bus illustration, colorful topic icons,
+  ticket-style round settings, and layouts for phones and larger screens
+- **Quick trip** — starts five questions from a surprise topic in one tap
+- Per-topic collections, discovery XP, daily goal, and completed-trip totals
+- A station strip shows the journey; clear answer feedback and an animated score
+  ring celebrate the little wins
 - Score, streak and elapsed time in the end-of-round summary; honours
   `prefers-reduced-motion`
 - **No install, no build, no dependencies** — plain ECMAScript modules and CSS
@@ -52,13 +66,24 @@ nextstop_quiz/
 │   ├── engine.js       pure quiz engine (no DOM): deck parser, rounds,
 │   │                   scoring, streaks, retry of missed questions
 │   ├── decks.js        loads bundled decks and user-supplied .md files
-│   └── main.js         UI controller: rendering, click/keyboard input
+│   ├── main.js         UI controller: rendering, click/keyboard input
+│   └── progress.js     persistent topic collections and discovery selection
 ├── decks/
 │   ├── science-basics.md
 │   ├── world-capitals.md
-│   └── german-first-words.md
+│   ├── german-first-words.md
+│   ├── nature-wildlife.md
+│   ├── space-explorer.md
+│   └── arts-language.md
+├── assets/journey.svg  original transit illustration (no remote assets)
 ├── test/
-│   └── engine.test.js  node --test suite for the engine and bundled decks
+│   ├── engine.test.js  engine, parser, and randomized round tests
+│   ├── progress.test.js progress rules and expanded deck checks
+│   └── fixtures/       a small import test deck
+├── serve.js            local-only preview server
+├── package.json        optional npm shortcuts (no dependencies)
+├── QUESTION-SOURCES.md additions, CC0 scope, and reference notes
+├── VERIFICATION.md     browser and packaging checks
 ├── generate-zip.js     packs the app into nextstop-web.zip (Node, no deps)
 └── README.md
 ```
@@ -70,9 +95,12 @@ imported and driven from Node or a test suite without a browser.
 ## Running
 
 ```sh
-python3 -m http.server 8000     # or any static file server
-# open http://localhost:8000
+node serve.js
+# open http://127.0.0.1:8000
 ```
+
+The preview server listens only on this computer. For phone access or a public
+release, host the app files on a static web host. Any static HTTP server also works.
 
 No `npm install`, no compilation. ES modules and `fetch` require HTTP —
 opening `index.html` directly via `file://` is blocked by browser CORS rules.
@@ -139,7 +167,8 @@ of `ask`, `reveal`, `done`.
 node generate-zip.js     # writes nextstop-web.zip (app files + decks, no dependencies)
 ```
 
-The zip contains `index.html`, `style.css`, `src/*.js` and `decks/*.md` with
+The zip contains `index.html`, `style.css`, `src/*.js`, `decks/*.md`, the original
+SVG illustration, and `QUESTION-SOURCES.md` with
 relative paths, so it can be unzipped and served from anywhere — or dropped
 into a Capacitor project as the web folder.
 
@@ -151,6 +180,9 @@ into a Capacitor project as the web folder.
   malformed decks (no questions, no answer, two answers, one choice) are rejected
   with a message naming the question
 - every bundled deck parses and has at least ten well-formed questions
+- exactly six registered decks with 30 unique four-choice questions each
+- progress persistence rules, corrupt-data recovery, local-day rollover, shuffled
+  question identity, no duplicate XP, and discovery selection priorities
 - rounds never exceed the deck size; shuffled choices keep the right answer text
 - seeded rounds are byte-for-byte reproducible
 - scoring, streaks, best streak, phase transitions and illegal calls
@@ -163,3 +195,10 @@ into a Capacitor project as the web folder.
 
 Made by Jess (Culurien) as a sample for the "games for the ride" collection.
 Free to play and to copy. Write decks, share decks.
+
+The 2026-09-07 makeover adds 144 independently written factual questions with
+a CC0 dedication scoped to those additions. The supplied archive contains modern
+commercial books and was not used as a question bank. See
+[QUESTION-SOURCES.md](QUESTION-SOURCES.md) for exact scope, references, and limitations.
+
+Browser QA and delivery checks are recorded in [VERIFICATION.md](VERIFICATION.md).
