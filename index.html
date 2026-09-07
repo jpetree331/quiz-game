@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Next Stop — a quiz for the ride</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚉</text></svg>"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>Next Stop</h1>
+        <p class="subtitle">A quiz for the two minutes before your stop</p>
+      </header>
+
+      <section id="start">
+        <section class="controls">
+          <label>Deck
+            <select id="deck"></select>
+          </label>
+          <label>Questions
+            <select id="size">
+              <option value="5">5</option>
+              <option value="10" selected>10</option>
+              <option value="15">15</option>
+            </select>
+          </label>
+          <button id="start-round" type="button" class="primary">Start</button>
+        </section>
+
+        <p id="deck-info" class="hint">Loading deck…</p>
+
+        <p class="hint">
+          Or open your own deck:
+          <input id="deck-file" type="file" accept=".md,.txt,text/markdown,text/plain" />
+        </p>
+
+        <p class="wrap-note">
+          Pick an answer with the number keys, the arrow keys and Enter, or a tap. Nothing is
+          timed. Whatever you miss comes back at the end so you can try again.
+        </p>
+      </section>
+
+      <section id="play" hidden>
+        <section class="status">
+          <div id="progress" class="pill pill-0">1 / 10</div>
+          <div id="score" class="pill pill-1">0 right</div>
+          <div id="streak" class="streak"></div>
+        </section>
+        <div class="track"><div id="progress-bar" class="bar"></div></div>
+
+        <main class="question" aria-live="polite">
+          <p id="prompt" class="prompt"></p>
+          <div id="choices" class="choices"></div>
+          <p id="feedback" class="feedback"></p>
+          <p id="note" class="note" hidden></p>
+        </main>
+
+        <section class="controls">
+          <button id="next" type="button" class="primary" hidden>Next</button>
+          <button id="quit" type="button">Back to menu</button>
+        </section>
+      </section>
+
+      <footer>
+        <p>Decks are plain markdown files. Write your own in any text editor — see the README.</p>
+      </footer>
+
+      <div id="overlay" hidden>
+        <div class="overlay-card">
+          <h2 id="overlay-title"></h2>
+          <p id="overlay-sub"></p>
+          <p id="best" class="hint"></p>
+          <div class="overlay-actions">
+            <button id="retry" type="button" class="primary">Retry the missed</button>
+            <button id="play-again" type="button">Play again</button>
+            <button id="to-menu" type="button">Menu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
