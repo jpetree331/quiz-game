@@ -1,8 +1,13 @@
 import { answer, currentQuestion, newRound, next, results, retryRound } from './engine.js';
 import { BUNDLED, loadBundledDeck, loadDeckFile } from './decks.js';
 
+const LINE_COLORS = ['#f5b342', '#5ec8ff', '#ff7ab6', '#3ddc84', '#c792ea', '#ffa447'];
+const RING_LENGTH = 2 * Math.PI * 52;
+
 const app = {
-    deck: null,
+    decks: new Map(), // id -> parsed deck (bundled decks load at startup)
+    deckId: BUNDLED[0].file,
+    size: 10,
     round: null,
     startedAt: 0,
     elapsedMs: 0,
@@ -11,15 +16,17 @@ const app = {
 const $ = (id) => document.getElementById(id);
 const startEl = $('start');
 const playEl = $('play');
-const deckSel = $('deck');
-const sizeSel = $('size');
+const deckListEl = $('deck-list');
+const sizeListEl = $('size-list');
 const deckInfo = $('deck-info');
 const deckFile = $('deck-file');
+const openFileBtn = $('open-file');
 const startBtn = $('start-round');
-const progressEl = $('progress');
-const progressBar = $('progress-bar');
+const stationsEl = $('stations');
+const qLabel = $('q-label');
 const scoreEl = $('score');
 const streakEl = $('streak');
+const questionEl = $('question');
 const promptEl = $('prompt');
 const choicesEl = $('choices');
 const feedbackEl = $('feedback');
@@ -28,7 +35,11 @@ const nextBtn = $('next');
 const quitBtn = $('quit');
 const overlayEl = $('overlay');
 const overlayTitle = $('overlay-title');
-const overlaySub = $('overlay-sub');
+const ringFill = $('ring-fill');
+const ringPct = $('ring-pct');
+const statScore = $('stat-score');
+const statStreak = $('stat-streak');
+const statTime = $('stat-time');
 const bestEl = $('best');
 const retryBtn = $('retry');
 const againBtn = $('play-again');
@@ -57,60 +68,85 @@ function writeBest(title, pct) {
 }
 
 // --- start screen -------------------------------------------------------------
-function fillDeckSelect() {
-    deckSel.innerHTML = '';
-    for (const d of BUNDLED) {
-        const opt = document.createElement('option');
-        opt.value = d.file;
-        opt.textContent = d.title;
-        deckSel.appendChild(opt);
+function currentDeck() {
+    return app.decks.get(app.deckId) ?? null;
+}
+
+function renderDeckList() {
+    deckListEl.innerHTML = '';
+    let i = 0;
+    for (const [id, deck] of app.decks) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'deck-card';
+        btn.dataset.id = id;
+        btn.style.setProperty('--line', LINE_COLORS[i % LINE_COLORS.length]);
+        btn.setAttribute('aria-pressed', String(id === app.deckId));
+        const n = deck.questions.length;
+        btn.innerHTML =
+            '<span class="check">✓</span>' +
+            '<span class="deck-title"></span>' +
+            `<span class="deck-meta">${n} question${n === 1 ? '' : 's'}${readBest(deck.title) > 0 ? ` · best ${readBest(deck.title)}%` : ''}</span>`;
+        btn.querySelector('.deck-title').textContent = deck.title;
+        btn.addEventListener('click', () => selectDeck(id));
+        deckListEl.appendChild(btn);
+        i++;
     }
 }
 
 function describeDeck() {
-    if (app.deck === null) {
-        deckInfo.textContent = 'Loading deck…';
+    const deck = currentDeck();
+    if (deck === null) {
+        deckInfo.textContent = app.decks.size === 0 ? 'Loading decks…' : 'Pick a line to board.';
         startBtn.disabled = true;
         return;
     }
-    const n = app.deck.questions.length;
-    const best = readBest(app.deck.title);
-    deckInfo.textContent =
-        `${app.deck.title} · ${n} question${n === 1 ? '' : 's'}` +
-        (app.deck.description ? ` · ${app.deck.description}` : '') +
-        (best > 0 ? ` · best ${best}%` : '');
+    deckInfo.textContent = deck.description || `${deck.title}.`;
     startBtn.disabled = false;
 }
 
-async function selectBundledDeck(file) {
-    app.deck = null;
+function selectDeck(id) {
+    app.deckId = id;
+    renderDeckList();
     describeDeck();
-    try {
-        app.deck = await loadBundledDeck(file);
+    const card = deckListEl.querySelector(`[data-id="${CSS.escape(id)}"]`);
+    if (card !== null)
+        card.focus();
+}
+
+function selectSize(size) {
+    app.size = size;
+    for (const b of sizeListEl.querySelectorAll('.seg'))
+        b.setAttribute('aria-pressed', String(Number(b.dataset.size) === size));
+}
+
+async function loadBundled() {
+    for (const d of BUNDLED) {
+        try {
+            app.decks.set(d.file, await loadBundledDeck(d.file));
+        }
+        catch (err) {
+            deckInfo.textContent = `Could not load ${d.title}: ${err.message}`;
+        }
     }
-    catch (err) {
-        deckInfo.textContent = `Could not load deck: ${err.message}`;
-        return;
-    }
+    if (!app.decks.has(app.deckId))
+        app.deckId = app.decks.keys().next().value ?? null;
+    renderDeckList();
     describeDeck();
 }
 
-async function selectOwnDeck(file) {
-    app.deck = null;
-    describeDeck();
+async function openOwnDeck(file) {
+    let deck;
     try {
-        app.deck = await loadDeckFile(file);
+        deck = await loadDeckFile(file);
     }
     catch (err) {
         deckInfo.textContent = `${file.name}: ${err.message}`;
         return;
     }
-    const opt = document.createElement('option');
-    opt.value = `file:${file.name}`;
-    opt.textContent = `${app.deck.title} (your file)`;
-    deckSel.appendChild(opt);
-    deckSel.value = opt.value;
-    describeDeck();
+    const id = `file:${file.name}`;
+    app.decks.set(id, deck);
+    selectDeck(id);
 }
 
 // --- round ----------------------------------------------------------------------
@@ -124,9 +160,16 @@ function startRound(round) {
 }
 
 function beginFromMenu() {
-    if (app.deck === null)
+    const deck = currentDeck();
+    if (deck === null)
         return;
-    startRound(newRound(app.deck, { size: Number(sizeSel.value) }));
+    startRound(newRound(deck, { size: app.size }));
+}
+
+function flash(kind) {
+    questionEl.classList.remove('flash-good', 'flash-bad');
+    void questionEl.offsetWidth; // restart the animation
+    questionEl.classList.add(kind === 'good' ? 'flash-good' : 'flash-bad');
 }
 
 function choose(i) {
@@ -134,6 +177,7 @@ function choose(i) {
         return;
     app.round = answer(app.round, i);
     render();
+    flash(app.round.answers[app.round.answers.length - 1].correct ? 'good' : 'bad');
     nextBtn.focus();
 }
 
@@ -155,8 +199,25 @@ function backToMenu() {
     hideOverlay();
     playEl.hidden = true;
     startEl.hidden = false;
+    renderDeckList();
     describeDeck();
     startBtn.focus();
+}
+
+function renderStations(round) {
+    const total = round.questions.length;
+    const frag = document.createDocumentFragment();
+    for (let i = 0; i < total; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'station';
+        const a = round.answers[i];
+        if (a !== undefined)
+            dot.classList.add(a.correct ? 'good' : 'bad');
+        else if (i === round.index && round.phase !== 'done')
+            dot.classList.add('current');
+        frag.appendChild(dot);
+    }
+    stationsEl.replaceChildren(frag);
 }
 
 function render() {
@@ -165,10 +226,9 @@ function render() {
         return;
     const q = currentQuestion(round);
     const total = round.questions.length;
-    const shown = Math.min(round.index + 1, total);
 
-    progressEl.textContent = `${shown} / ${total}`;
-    progressBar.style.width = `${(round.answers.length / total) * 100}%`;
+    renderStations(round);
+    qLabel.textContent = `Stop ${Math.min(round.index + 1, total)} of ${total}`;
     scoreEl.textContent = `${round.score} right`;
     streakEl.textContent = round.streak >= 2 ? `🔥 ${round.streak} in a row` : '';
 
@@ -203,7 +263,9 @@ function render() {
         noteEl.textContent = q.note;
         noteEl.hidden = q.note === '';
         nextBtn.hidden = false;
-        nextBtn.textContent = round.index + 1 >= total ? 'See results' : 'Next';
+        nextBtn.innerHTML = round.index + 1 >= total
+            ? 'End of the line <span class="arrow" aria-hidden="true">→</span>'
+            : 'Next stop <span class="arrow" aria-hidden="true">→</span>';
     }
     else {
         feedbackEl.textContent = '';
@@ -224,14 +286,24 @@ function formatElapsed(ms) {
 function showOverlay() {
     const r = results(app.round);
     writeBest(app.round.deckTitle, r.pct);
-    overlayTitle.textContent = r.perfect ? 'Perfect run!' : `${r.score} of ${r.total}`;
-    overlaySub.textContent =
-        `${r.pct}% · best streak ${r.bestStreak} · ${formatElapsed(app.elapsedMs)}`;
+    overlayTitle.textContent = r.perfect
+        ? 'Perfect ride!'
+        : r.pct >= 70 ? 'Nicely done.' : r.pct >= 40 ? 'Getting there.' : 'Rough ride. Try again?';
+    statScore.textContent = `${r.score} / ${r.total}`;
+    statStreak.textContent = String(r.bestStreak);
+    statTime.textContent = formatElapsed(app.elapsedMs);
     const best = readBest(app.round.deckTitle);
-    bestEl.textContent = best > 0 ? `Best on this deck: ${best}%` : '';
+    bestEl.textContent = best > 0 ? `Best on this line: ${best}%` : '';
     retryBtn.hidden = r.missed.length === 0;
     retryBtn.textContent = `Retry the ${r.missed.length} missed`;
+
+    ringPct.textContent = `${r.pct}%`;
+    ringFill.style.stroke = r.pct === 100 ? 'var(--good)' : 'var(--accent)';
+    ringFill.style.strokeDashoffset = String(RING_LENGTH);
     overlayEl.hidden = false;
+    requestAnimationFrame(() => {
+        ringFill.style.strokeDashoffset = String(RING_LENGTH * (1 - r.pct / 100));
+    });
     (r.missed.length > 0 ? retryBtn : againBtn).focus();
 }
 
@@ -240,14 +312,21 @@ function hideOverlay() {
 }
 
 // --- keyboard: number keys, arrows and Enter are enough for a TV remote ------
-function moveFocus(delta) {
-    const items = [...playEl.querySelectorAll('button:not([hidden]):not([disabled])')];
+function focusables(container) {
+    return [...container.querySelectorAll('button:not([hidden]):not([disabled])')]
+        .filter((b) => b.offsetParent !== null);
+}
+
+function moveFocus(container, delta) {
+    const items = focusables(container);
     if (items.length === 0)
         return;
     const i = items.indexOf(document.activeElement);
-    const nextIndex = i === -1 ? 0 : (i + delta + items.length) % items.length;
-    items[nextIndex].focus();
+    items[i === -1 ? 0 : (i + delta + items.length) % items.length].focus();
 }
+
+const BACK = new Set(['ArrowUp', 'ArrowLeft']);
+const FORWARD = new Set(['ArrowDown', 'ArrowRight']);
 
 document.addEventListener('keydown', (ev) => {
     // Enter always activates the focused button — explicit, so it behaves the
@@ -258,25 +337,23 @@ document.addEventListener('keydown', (ev) => {
         active.click();
         return;
     }
+
     if (!overlayEl.hidden) {
-        if (ev.key === 'ArrowDown' || ev.key === 'ArrowRight') {
+        if (BACK.has(ev.key) || FORWARD.has(ev.key)) {
             ev.preventDefault();
-            const items = [...overlayEl.querySelectorAll('button:not([hidden])')];
-            items[(items.indexOf(document.activeElement) + 1) % items.length].focus();
-        }
-        else if (ev.key === 'ArrowUp' || ev.key === 'ArrowLeft') {
-            ev.preventDefault();
-            const items = [...overlayEl.querySelectorAll('button:not([hidden])')];
-            const i = items.indexOf(document.activeElement);
-            items[(i - 1 + items.length) % items.length].focus();
+            moveFocus(overlayEl, BACK.has(ev.key) ? -1 : 1);
         }
         return;
     }
+
     if (app.round === null) {
-        if (ev.key === 'Enter' && document.activeElement === document.body)
-            startBtn.focus();
+        if (BACK.has(ev.key) || FORWARD.has(ev.key)) {
+            ev.preventDefault();
+            moveFocus(startEl, BACK.has(ev.key) ? -1 : 1);
+        }
         return;
     }
+
     const q = currentQuestion(app.round);
     if (app.round.phase === 'ask' && /^[1-9]$/.test(ev.key)) {
         const i = Number(ev.key) - 1;
@@ -293,32 +370,35 @@ document.addEventListener('keydown', (ev) => {
     }
     if (ev.key === 'ArrowDown') {
         ev.preventDefault();
-        moveFocus(1);
+        moveFocus(playEl, 1);
     }
     else if (ev.key === 'ArrowUp') {
         ev.preventDefault();
-        moveFocus(-1);
+        moveFocus(playEl, -1);
     }
     else if (ev.key === 'Escape') {
         backToMenu();
     }
 });
 
-deckSel.addEventListener('change', () => {
-    if (!deckSel.value.startsWith('file:'))
-        selectBundledDeck(deckSel.value);
+sizeListEl.addEventListener('click', (ev) => {
+    const b = ev.target.closest('.seg');
+    if (b !== null)
+        selectSize(Number(b.dataset.size));
 });
+openFileBtn.addEventListener('click', () => deckFile.click());
 deckFile.addEventListener('change', () => {
     const file = deckFile.files[0];
     if (file !== undefined)
-        selectOwnDeck(file);
+        openOwnDeck(file);
+    deckFile.value = '';
 });
 startBtn.addEventListener('click', beginFromMenu);
 nextBtn.addEventListener('click', advance);
 quitBtn.addEventListener('click', backToMenu);
 retryBtn.addEventListener('click', () => startRound(retryRound(app.round)));
-againBtn.addEventListener('click', () => startRound(newRound(app.deck, { size: Number(sizeSel.value) })));
+againBtn.addEventListener('click', () => startRound(newRound(currentDeck(), { size: app.size })));
 menuBtn.addEventListener('click', backToMenu);
 
-fillDeckSelect();
-selectBundledDeck(deckSel.value);
+describeDeck();
+loadBundled();

@@ -36,7 +36,10 @@ short extra round. Keep retrying until there is nothing left to miss.
 - **Bring your own deck** — open any `.md` file from your device with the file
   picker on the start screen
 - **Three bundled decks** — science basics, world capitals, German first words
-- Progress bar, score and streak pills, end-of-round summary with elapsed time
+- Transit-signage look: deck "lines" as ticket cards, a station strip that lights
+  each stop green or red as you answer, a score ring at the end of the line
+- Score, streak and elapsed time in the end-of-round summary; honours
+  `prefers-reduced-motion`
 - **No install, no build, no dependencies** — plain ECMAScript modules and CSS
 
 ## Project structure
