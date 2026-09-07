@@ -48,6 +48,7 @@ export function parseDeck(markdown) {
     const deck = { title: 'Untitled deck', description: '', questions: [] };
     const descLines = [];
     let q = null;
+    let tier;
 
     const finish = () => {
         if (q === null)
@@ -63,9 +64,17 @@ export function parseDeck(markdown) {
 
     for (const raw of lines) {
         const line = raw.trim();
+        const tierMarker = /^<!--\s*tier:\s*(.*?)\s*-->$/.exec(line);
+        if (tierMarker) {
+            finish();
+            tier = Number(tierMarker[1]);
+            if (![1, 2, 3].includes(tier)) throw new Error('tier must be 1, 2, or 3');
+            continue;
+        }
         if (line.startsWith('## ')) {
             finish();
             q = { prompt: line.slice(3).trim(), choices: [], answer: -1, note: '' };
+            if (tier !== undefined) q.tier = tier;
             continue;
         }
         if (line.startsWith('# ')) {
@@ -108,11 +117,10 @@ export function parseDeck(markdown) {
 /** One question with its choices shuffled and the answer index remapped. */
 function dealQuestion(q, rng, shuffleChoices) {
     if (!shuffleChoices)
-        return { prompt: q.prompt, note: q.note, choices: [...q.choices], answer: q.answer };
+        return { ...q, choices: [...q.choices] };
     const order = shuffle(q.choices.map((_, i) => i), rng);
     return {
-        prompt: q.prompt,
-        note: q.note,
+        ...q,
         choices: order.map((i) => q.choices[i]),
         answer: order.indexOf(q.answer),
     };

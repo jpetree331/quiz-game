@@ -1,6 +1,8 @@
 # Beyond Earth
 A quick escape into planets, moonlight, and the great beyond.
 
+<!-- tier: 1 -->
+
 ## Which planet has the largest diameter in our solar system?
 - [x] Jupiter
 - [ ] Saturn
@@ -210,3 +212,217 @@ A quick escape into planets, moonlight, and the great beyond.
 - [ ] Orbit
 - [ ] Horizon
 > Earth's rotation axis runs through the North and South Poles.
+
+<!-- tier: 2 -->
+
+## What is an exoplanet?
+- [x] A planet outside our solar system
+- [ ] A moon inside Earth's atmosphere
+- [ ] An asteroid with no orbit
+- [ ] A star at the center of a galaxy
+> Exoplanets orbit stars beyond the Sun, or may travel without a host star.
+
+## Why do astronauts appear weightless while orbiting Earth?
+- [x] They and their spacecraft are in continuous free fall
+- [ ] There is no gravity at that height
+- [ ] Their mass becomes zero
+- [ ] Earth's magnetic field cancels gravity
+> An orbit is a continuous fall around Earth.
+
+## What is the visible surface of the Sun called?
+- [x] Photosphere
+- [ ] Core
+- [ ] Corona
+- [ ] Radiative zone
+> Most sunlight visible to our eyes comes from the photosphere.
+
+## Which solar layer extends outward and is visible during a total solar eclipse?
+- [x] Corona
+- [ ] Core
+- [ ] Ocean
+- [ ] Crust
+> The corona is the Sun's outer atmosphere.
+
+## What is a constellation in modern astronomy?
+- [x] A defined region of the sky
+- [ ] A group of planets sharing one moon
+- [ ] A single enormous star
+- [ ] A kind of meteorite
+> Modern constellations partition the sky into named regions.
+
+## What explains the Moon's changing phases?
+- [x] Our changing view of its sunlit half
+- [ ] Earth's shadow covering it every month
+- [ ] The Moon making more light each week
+- [ ] Clouds on the Moon
+> Phases depend on the relative positions of the Sun, Earth, and Moon.
+
+## What is a supernova?
+- [x] A powerful stellar explosion
+- [ ] The birth of an ordinary comet
+- [ ] A daily solar eclipse
+- [ ] A planet's cloud pattern
+> Supernovae can arise through different processes involving stars.
+
+## Which direction does a comet's ion tail generally point?
+- [x] Away from the Sun
+- [ ] Toward the Sun
+- [ ] Always toward Earth
+- [ ] Always behind its direction of travel
+> The solar wind influences the direction of the ion tail.
+
+## What is a white dwarf?
+- [x] A compact stellar remnant
+- [ ] A small icy moon
+- [ ] A newly formed gas giant
+- [ ] A kind of asteroid belt
+> A white dwarf is the exposed remnant core of a low- or medium-mass star.
+
+## What is the name for a planet passing in front of its star from our viewpoint?
+- [x] Transit
+- [ ] Conjunction only
+- [ ] Supernova
+- [ ] Accretion
+> A transit can cause a small, measurable dip in starlight.
+
+## Which moon is especially known for intense volcanic activity?
+- [x] Io
+- [ ] Europa
+- [ ] Callisto
+- [ ] Mimas
+> Io's interior is heated strongly by tidal effects.
+
+## What is the closest star to Earth other than the Sun?
+- [x] Proxima Centauri
+- [ ] Sirius
+- [ ] Polaris
+- [ ] Betelgeuse
+> Proxima Centauri is part of the Alpha Centauri stellar system.
+
+## What is the Kuiper Belt?
+- [x] A region beyond Neptune containing many icy bodies
+- [ ] A ring around Earth
+- [ ] The gap between Mercury and Venus
+- [ ] The Sun's visible surface
+> Pluto is one of the bodies in the Kuiper Belt.
+
+## Which planet has a large storm known as the Great Red Spot?
+- [x] Jupiter
+- [ ] Saturn
+- [ ] Neptune
+- [ ] Venus
+> The Great Red Spot is a long-lived atmospheric storm.
+
+## What do we call a system of two stars orbiting their common center of mass?
+- [x] Binary star system
+- [ ] Meteor shower
+- [ ] Planetary ring
+- [ ] Open crater
+> The two stars are gravitationally bound.
+
+<!-- tier: 3 -->
+
+## According to Kepler's first law, a planet's ideal orbit around the Sun has what shape?
+- [x] An ellipse with the Sun at one focus
+- [ ] A square with the Sun at its center
+- [ ] A circle with the Sun on its edge
+- [ ] A spiral that must shrink every orbit
+> In the two-body approximation, bound orbits are elliptical.
+
+## According to Kepler's second law, when does a planet move fastest in its orbit?
+- [x] When closest to the Sun
+- [ ] When farthest from the Sun
+- [ ] Only at an equinox
+- [ ] At the same speed everywhere
+> Equal areas swept in equal times imply faster motion near perihelion.
+
+## What is perihelion?
+- [x] The point in an orbit nearest the Sun
+- [ ] The point nearest Earth
+- [ ] The farthest point from the Sun
+- [ ] The center of the Milky Way
+> The corresponding farthest point is aphelion.
+
+## Approximately how many light-years equal one parsec?
+- [x] 3.26
+- [ ] 0.31
+- [ ] 9.46
+- [ ] 206,265
+> The parsec is a distance unit related to stellar parallax.
+
+## What does stellar parallax measure?
+- [x] A nearby star's apparent positional shift as the observer moves
+- [ ] A star's exact age from its color alone
+- [ ] The weight of a telescope
+- [ ] The number of planets around every star
+> Annual parallax uses Earth's changing position around the Sun.
+
+## A star's absorption lines shift toward longer wavelengths due to radial motion. What does that suggest?
+- [x] The star is moving away from us
+- [ ] The star is moving toward us
+- [ ] The star has stopped emitting light
+- [ ] The star has no gravity
+> Recession causes a Doppler redshift.
+
+## Which star color generally indicates the highest surface temperature?
+- [x] Blue
+- [ ] Red
+- [ ] Orange
+- [ ] Yellow
+> Hotter stellar surfaces emit a greater share of their light at shorter wavelengths.
+
+## What is a pulsar?
+- [x] A rotating neutron star whose beams sweep past us
+- [ ] A planet with a bright ring
+- [ ] A comet reflecting city lights
+- [ ] An ordinary cloud in Earth's atmosphere
+> The sweeping beams can appear as regularly timed pulses.
+
+## What does a star's position on the main sequence mainly reflect?
+- [x] Its mass
+- [ ] Its distance from Earth alone
+- [ ] Its number of planets
+- [ ] Its direction of travel alone
+> Main-sequence stars fuse hydrogen in their cores, with properties strongly linked to mass.
+
+## How many Lagrange points exist in the usual restricted three-body model for two large orbiting bodies?
+- [x] Five
+- [ ] Two
+- [ ] Three
+- [ ] Eight
+> The five locations are labeled L1 through L5.
+
+## What is the ecliptic?
+- [x] The plane of Earth's orbit, projected onto the sky
+- [ ] The Moon's solid crust
+- [ ] The edge of every galaxy
+- [ ] A type of comet nucleus
+> The Sun's apparent yearly path follows the ecliptic.
+
+## Why does the Moon keep roughly the same face toward Earth?
+- [x] Its rotation period matches its orbital period
+- [ ] It never rotates at all
+- [ ] Earth blocks all rotation
+- [ ] It has no mass
+> This synchronization is called tidal locking.
+
+## Which object is supported primarily by electron degeneracy pressure?
+- [x] White dwarf
+- [ ] Ordinary gas cloud
+- [ ] Rocky asteroid
+- [ ] Red giant's outer atmosphere
+> Quantum effects resist further compression in a white dwarf.
+
+## Which element is the main product of hydrogen fusion in a main-sequence star?
+- [x] Helium
+- [ ] Iron
+- [ ] Uranium
+- [ ] Silicon
+> Several hydrogen nuclei ultimately combine to form a helium nucleus.
+
+## What is the Schwarzschild radius associated with for a nonrotating, uncharged black hole?
+- [x] Its event horizon
+- [ ] Its visible solid surface
+- [ ] Its nearest planet's orbit
+- [ ] The outer edge of its host galaxy
+> The Schwarzschild solution describes this idealized black hole.

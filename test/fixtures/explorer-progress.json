@@ -1,0 +1,82 @@
+{
+  "format": "nextstop-save",
+  "version": 1,
+  "exportedAt": "2026-09-07T19:56:04.641Z",
+  "progress": {
+    "version": 2,
+    "topics": {
+      "science-basics.md": {
+        "seen": [
+          "[\"What is the chemical symbol for gold?\",[\"Ag\",\"Au\",\"Gd\",\"Go\"],\"Au\"]",
+          "[\"At sea level, water boils at what temperature?\",[\"100 °C\",\"110 °C\",\"120 °C\",\"90 °C\"],\"100 °C\"]",
+          "[\"Which gas do plants take in to make their food?\",[\"Carbon dioxide\",\"Hydrogen\",\"Nitrogen\",\"Oxygen\"],\"Carbon dioxide\"]",
+          "[\"What is at the center of an atom?\",[\"A molecule\",\"A photon\",\"An electron\",\"The nucleus\"],\"The nucleus\"]",
+          "[\"Which planet is closest to the Sun?\",[\"Earth\",\"Mars\",\"Mercury\",\"Venus\"],\"Mercury\"]",
+          "[\"What is the pH of pure water at room temperature?\",[\"0\",\"14\",\"5\",\"7\"],\"7\"]",
+          "[\"Which part of the cell is often called its powerhouse?\",[\"Cell wall\",\"Mitochondria\",\"Nucleus\",\"Ribosome\"],\"Mitochondria\"]",
+          "[\"Which mineral ranks highest on the Mohs hardness scale?\",[\"Diamond\",\"Granite\",\"Quartz\",\"Steel\"],\"Diamond\"]",
+          "[\"Which gas makes up most of the air we breathe?\",[\"Argon\",\"Carbon dioxide\",\"Nitrogen\",\"Oxygen\"],\"Nitrogen\"]",
+          "[\"Roughly how fast does light travel in empty space?\",[\"3,000,000 km per second\",\"30,000 km per second\",\"300 km per second\",\"300,000 km per second\"],\"300,000 km per second\"]",
+          "[\"Which calculation gives an object's density?\",[\"Distance divided by time\",\"Force divided by area\",\"Mass divided by volume\",\"Volume divided by time\"],\"Mass divided by volume\"]",
+          "[\"Which unit is used for wave frequency?\",[\"Hertz\",\"Joule\",\"Newton\",\"Pascal\"],\"Hertz\"]",
+          "[\"A car travels 160 km in 2 hours. What is its average speed?\",[\"160 km/h\",\"320 km/h\",\"40 km/h\",\"80 km/h\"],\"80 km/h\"]",
+          "[\"Which type of chemical bond involves atoms sharing electron pairs?\",[\"Covalent\",\"Gravitational\",\"Ionic\",\"Magnetic\"],\"Covalent\"]",
+          "[\"Which structures carry out photosynthesis in plant cells?\",[\"Centrioles\",\"Chloroplasts\",\"Lysosomes\",\"Ribosomes\"],\"Chloroplasts\"]",
+          "[\"What is the SI unit of force?\",[\"Joule\",\"Kelvin\",\"Newton\",\"Watt\"],\"Newton\"]",
+          "[\"In salt water, which substance is the solvent?\",[\"Chlorine alone\",\"Salt\",\"Sodium alone\",\"Water\"],\"Water\"]",
+          "[\"Which quantity includes both speed and direction?\",[\"Mass\",\"Temperature\",\"Velocity\",\"Volume\"],\"Velocity\"]",
+          "[\"Which method best separates sand from water without dissolving the sand?\",[\"Fermentation\",\"Filtration\",\"Magnetization\",\"Melting\"],\"Filtration\"]"
+        ],
+        "collected": [
+          "[\"What is the chemical symbol for gold?\",[\"Ag\",\"Au\",\"Gd\",\"Go\"],\"Au\"]",
+          "[\"At sea level, water boils at what temperature?\",[\"100 °C\",\"110 °C\",\"120 °C\",\"90 °C\"],\"100 °C\"]",
+          "[\"Which gas do plants take in to make their food?\",[\"Carbon dioxide\",\"Hydrogen\",\"Nitrogen\",\"Oxygen\"],\"Carbon dioxide\"]",
+          "[\"What is at the center of an atom?\",[\"A molecule\",\"A photon\",\"An electron\",\"The nucleus\"],\"The nucleus\"]",
+          "[\"Which planet is closest to the Sun?\",[\"Earth\",\"Mars\",\"Mercury\",\"Venus\"],\"Mercury\"]",
+          "[\"What is the pH of pure water at room temperature?\",[\"0\",\"14\",\"5\",\"7\"],\"7\"]",
+          "[\"Which part of the cell is often called its powerhouse?\",[\"Cell wall\",\"Mitochondria\",\"Nucleus\",\"Ribosome\"],\"Mitochondria\"]",
+          "[\"Which mineral ranks highest on the Mohs hardness scale?\",[\"Diamond\",\"Granite\",\"Quartz\",\"Steel\"],\"Diamond\"]",
+          "[\"Which gas makes up most of the air we breathe?\",[\"Argon\",\"Carbon dioxide\",\"Nitrogen\",\"Oxygen\"],\"Nitrogen\"]",
+          "[\"Roughly how fast does light travel in empty space?\",[\"3,000,000 km per second\",\"30,000 km per second\",\"300 km per second\",\"300,000 km per second\"],\"300,000 km per second\"]",
+          "[\"Which calculation gives an object's density?\",[\"Distance divided by time\",\"Force divided by area\",\"Mass divided by volume\",\"Volume divided by time\"],\"Mass divided by volume\"]",
+          "[\"Which unit is used for wave frequency?\",[\"Hertz\",\"Joule\",\"Newton\",\"Pascal\"],\"Hertz\"]",
+          "[\"A car travels 160 km in 2 hours. What is its average speed?\",[\"160 km/h\",\"320 km/h\",\"40 km/h\",\"80 km/h\"],\"80 km/h\"]",
+          "[\"Which type of chemical bond involves atoms sharing electron pairs?\",[\"Covalent\",\"Gravitational\",\"Ionic\",\"Magnetic\"],\"Covalent\"]",
+          "[\"Which structures carry out photosynthesis in plant cells?\",[\"Centrioles\",\"Chloroplasts\",\"Lysosomes\",\"Ribosomes\"],\"Chloroplasts\"]",
+          "[\"What is the SI unit of force?\",[\"Joule\",\"Kelvin\",\"Newton\",\"Watt\"],\"Newton\"]",
+          "[\"In salt water, which substance is the solvent?\",[\"Chlorine alone\",\"Salt\",\"Sodium alone\",\"Water\"],\"Water\"]",
+          "[\"Which quantity includes both speed and direction?\",[\"Mass\",\"Temperature\",\"Velocity\",\"Volume\"],\"Velocity\"]",
+          "[\"Which method best separates sand from water without dissolving the sand?\",[\"Fermentation\",\"Filtration\",\"Magnetization\",\"Melting\"],\"Filtration\"]"
+        ],
+        "rewards": {
+          "[\"What is the chemical symbol for gold?\",[\"Ag\",\"Au\",\"Gd\",\"Go\"],\"Au\"]": 10,
+          "[\"At sea level, water boils at what temperature?\",[\"100 °C\",\"110 °C\",\"120 °C\",\"90 °C\"],\"100 °C\"]": 10,
+          "[\"Which gas do plants take in to make their food?\",[\"Carbon dioxide\",\"Hydrogen\",\"Nitrogen\",\"Oxygen\"],\"Carbon dioxide\"]": 10,
+          "[\"What is at the center of an atom?\",[\"A molecule\",\"A photon\",\"An electron\",\"The nucleus\"],\"The nucleus\"]": 10,
+          "[\"Which planet is closest to the Sun?\",[\"Earth\",\"Mars\",\"Mercury\",\"Venus\"],\"Mercury\"]": 10,
+          "[\"What is the pH of pure water at room temperature?\",[\"0\",\"14\",\"5\",\"7\"],\"7\"]": 10,
+          "[\"Which part of the cell is often called its powerhouse?\",[\"Cell wall\",\"Mitochondria\",\"Nucleus\",\"Ribosome\"],\"Mitochondria\"]": 10,
+          "[\"Which mineral ranks highest on the Mohs hardness scale?\",[\"Diamond\",\"Granite\",\"Quartz\",\"Steel\"],\"Diamond\"]": 10,
+          "[\"Which gas makes up most of the air we breathe?\",[\"Argon\",\"Carbon dioxide\",\"Nitrogen\",\"Oxygen\"],\"Nitrogen\"]": 10,
+          "[\"Roughly how fast does light travel in empty space?\",[\"3,000,000 km per second\",\"30,000 km per second\",\"300 km per second\",\"300,000 km per second\"],\"300,000 km per second\"]": 10,
+          "[\"Which calculation gives an object's density?\",[\"Distance divided by time\",\"Force divided by area\",\"Mass divided by volume\",\"Volume divided by time\"],\"Mass divided by volume\"]": 20,
+          "[\"Which unit is used for wave frequency?\",[\"Hertz\",\"Joule\",\"Newton\",\"Pascal\"],\"Hertz\"]": 20,
+          "[\"A car travels 160 km in 2 hours. What is its average speed?\",[\"160 km/h\",\"320 km/h\",\"40 km/h\",\"80 km/h\"],\"80 km/h\"]": 20,
+          "[\"Which type of chemical bond involves atoms sharing electron pairs?\",[\"Covalent\",\"Gravitational\",\"Ionic\",\"Magnetic\"],\"Covalent\"]": 20,
+          "[\"Which structures carry out photosynthesis in plant cells?\",[\"Centrioles\",\"Chloroplasts\",\"Lysosomes\",\"Ribosomes\"],\"Chloroplasts\"]": 20,
+          "[\"What is the SI unit of force?\",[\"Joule\",\"Kelvin\",\"Newton\",\"Watt\"],\"Newton\"]": 20,
+          "[\"In salt water, which substance is the solvent?\",[\"Chlorine alone\",\"Salt\",\"Sodium alone\",\"Water\"],\"Water\"]": 20,
+          "[\"Which quantity includes both speed and direction?\",[\"Mass\",\"Temperature\",\"Velocity\",\"Volume\"],\"Velocity\"]": 20,
+          "[\"Which method best separates sand from water without dissolving the sand?\",[\"Fermentation\",\"Filtration\",\"Magnetization\",\"Melting\"],\"Filtration\"]": 20
+        },
+        "trips": 0,
+        "best": 0,
+        "bestByTier": {}
+      }
+    },
+    "daily": {
+      "date": "2026-09-07",
+      "answered": 19
+    }
+  }
+}

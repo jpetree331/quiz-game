@@ -44,7 +44,7 @@ test('corrupt or malformed stored data fails safely and valid topic history surv
     assert.deepEqual(decodeProgress(raw), emptyProgress());
   }
   const p = decodeProgress('{"version":1,"topics":{"ok":{"seen":["a","a",2],"collected":["a"],"trips":-5,"best":1000},"broken":null},"daily":{"answered":"NaN"}}');
-  assert.deepEqual(p.topics.ok, { seen: ['a'], collected: ['a'], trips: 0, best: 100 });
+  assert.deepEqual(p.topics.ok, { seen: ['a'], collected: ['a'], rewards: { a: 10 }, trips: 0, best: 100, bestByTier: { 1: 100, 2: 0, 3: 0 } });
   assert.equal(p.daily.answered, 0);
   const unusual = recordAnswer(emptyProgress(), '__proto__', q, true).progress;
   assert.equal(summary(decodeProgress(JSON.stringify(unusual))).xp, 10);
@@ -85,12 +85,13 @@ test('full trip scores and progress integrate with retry rounds', () => {
   assert.equal(collectedCount(p, 't', deck), 5);
 });
 
-test('all six registered decks contain 30 distinct, well-formed four-choice questions', async () => {
+test('all six registered decks contain 60 distinct, well-formed four-choice questions', async () => {
   assert.equal(BUNDLED.length, 6);
   const prompts = new Set();
   for (const { file } of BUNDLED) {
     const d = parseDeck(await readFile(new URL(`../decks/${file}`, import.meta.url), 'utf8'));
-    assert.equal(d.questions.length, 30, file);
+    assert.equal(d.questions.length, 60, file);
+    assert.deepEqual([1, 2, 3].map(t => d.questions.filter(q => q.tier === t).length), [30, 15, 15]);
     for (const q of d.questions) {
       assert.ok(!prompts.has(q.prompt.toLowerCase()), `Duplicate: ${q.prompt}`);
       prompts.add(q.prompt.toLowerCase());
@@ -99,5 +100,5 @@ test('all six registered decks contain 30 distinct, well-formed four-choice ques
       assert.ok(q.prompt.length && q.choices.every(c => c.trim().length), q.prompt);
     }
   }
-  assert.equal(prompts.size, 180);
+  assert.equal(prompts.size, 360);
 });

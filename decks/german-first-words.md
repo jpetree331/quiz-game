@@ -1,6 +1,8 @@
 # German — first words
 Useful little words for your next adventure.
 
+<!-- tier: 1 -->
+
 ## What does "Danke" mean?
 - [x] Thank you
 - [ ] Please
@@ -202,3 +204,217 @@ Useful little words for your next adventure.
 - [ ] The chair
 - [ ] The clock
 > Schlüssel is the word for a key.
+
+<!-- tier: 2 -->
+
+## Which form completes "Ich ___ müde" (I am tired)?
+- [x] bin
+- [ ] bist
+- [ ] ist
+- [ ] seid
+> Bin is the first-person singular form of sein.
+
+## Which form completes "Du ___ hier" (You are here)?
+- [x] bist
+- [ ] bin
+- [ ] ist
+- [ ] sind
+> Bist is used with the informal singular du.
+
+## What does "Wir lernen Deutsch" mean?
+- [x] We are learning German
+- [ ] They teach French
+- [ ] You are reading English
+- [ ] I speak Spanish
+> Wir means we; lernen means to learn.
+
+## Which word is the plural of "das Buch"?
+- [x] Bücher
+- [ ] Buchen
+- [ ] Buchs
+- [ ] Büchen
+> The plural changes the vowel and adds -er.
+
+## What does "langsam" mean?
+- [x] Slow
+- [ ] Fast
+- [ ] Early
+- [ ] Loud
+> Langsam contrasts with schnell, meaning fast.
+
+## What does "gestern" mean?
+- [x] Yesterday
+- [ ] Tomorrow
+- [ ] Today
+- [ ] Soon
+> Gestern refers to the day before today.
+
+## What does "übermorgen" mean?
+- [x] The day after tomorrow
+- [ ] The day before yesterday
+- [ ] This morning
+- [ ] Every Monday
+> Morgen means tomorrow; übermorgen goes one day further.
+
+## Which German word means "because"?
+- [x] Weil
+- [ ] Aber
+- [ ] Oder
+- [ ] Und
+> Weil introduces a reason.
+
+## What does "Ich habe Hunger" express?
+- [x] I am hungry
+- [ ] I am thirsty
+- [ ] I am cold
+- [ ] I am late
+> German expresses hunger with haben, literally to have.
+
+## Which phrase means "I don't understand"?
+- [x] Ich verstehe nicht
+- [ ] Ich komme morgen
+- [ ] Ich wohne hier
+- [ ] Ich lese gern
+> Verstehen means to understand.
+
+## What time is "halb vier" in standard German?
+- [x] 3:30
+- [ ] 4:30
+- [ ] 4:15
+- [ ] 3:45
+> It means halfway to four, not half past four.
+
+## What does "der Fahrplan" mean?
+- [x] The timetable
+- [ ] The driver's license
+- [ ] The ticket price
+- [ ] The suitcase
+> A Fahrplan shows scheduled transport times.
+
+## Which German question asks "How much does that cost?"?
+- [x] Wie viel kostet das?
+- [ ] Wo ist der Bahnhof?
+- [ ] Wann kommst du?
+- [ ] Wie heißt du?
+> Wie viel asks how much.
+
+## Which word completes "Wir ___ Kaffee" (We drink coffee)?
+- [x] trinken
+- [ ] trinkt
+- [ ] trinkst
+- [ ] trinke
+> The wir form of trinken ends in -en.
+
+## What does "gegenüber" commonly mean as a location word?
+- [x] Opposite or across from
+- [ ] Underneath
+- [ ] Inside
+- [ ] Far above
+> It can describe something on the opposite side.
+
+<!-- tier: 3 -->
+
+## In standard written German, where does the finite verb go in a clause introduced by "weil"?
+- [x] At the end of the subordinate clause
+- [ ] Always before weil
+- [ ] Always immediately after weil
+- [ ] Outside the sentence entirely
+> Weil introduces a subordinate clause with verb-final order.
+
+## Which case normally follows the German preposition "mit"?
+- [x] Dative
+- [ ] Accusative
+- [ ] Genitive
+- [ ] Nominative
+> Mit belongs to the prepositions that govern the dative.
+
+## Which article completes "Ich sehe ___ Mann"?
+- [x] den
+- [ ] der
+- [ ] dem
+- [ ] des
+> The masculine direct object takes the accusative article den.
+
+## Which sentence correctly uses the separable verb "aufstehen"?
+- [x] Ich stehe früh auf.
+- [ ] Ich aufstehe früh.
+- [ ] Ich stehe auf früh auf.
+- [ ] Ich auf früh stehe.
+> In a main clause, the separable prefix normally goes to the end.
+
+## Which past participle of gehen completes "Sie ist gestern nach Hause ___"?
+- [x] gegangen
+- [ ] gegeht
+- [ ] gehen
+- [ ] ging
+> Gehen forms its perfect tense with sein and the participle gegangen.
+
+## What is the comparative form of "gut"?
+- [x] besser
+- [ ] guter
+- [ ] gutest
+- [ ] mehr gut
+> Gut has the irregular comparative besser.
+
+## What does the contraction "zum" combine?
+- [x] zu dem
+- [ ] zu den
+- [ ] zu der
+- [ ] zu das
+> Zum combines zu with the dative article dem.
+
+## Which adjective form completes "mit einem ___ Freund"?
+- [x] guten
+- [ ] gute
+- [ ] guter
+- [ ] gutes
+> After einem in this dative phrase, the adjective takes -en.
+
+## Which phrase correctly means "the child's book" using the genitive?
+- [x] das Buch des Kindes
+- [ ] das Buch dem Kind
+- [ ] das Buch den Kind
+- [ ] das Buch der Kindes
+> The neuter singular genitive uses des and adds an ending to Kind.
+
+## Which sentence has standard main-clause word order?
+- [x] Morgen fahre ich nach Berlin.
+- [ ] Morgen ich fahre nach Berlin.
+- [ ] Morgen nach Berlin ich fahre.
+- [ ] Ich morgen nach Berlin fahre.
+> When morgen occupies the first position, the finite verb still comes second.
+
+## Which word correctly completes "Ich habe ___ Auto" to mean "I have no car"?
+- [x] kein
+- [ ] nicht
+- [ ] keine
+- [ ] keinen
+> Kein negates an indefinite neuter noun in this phrase.
+
+## Which sentence expresses a passive action in the present tense?
+- [x] Das Haus wird gebaut.
+- [ ] Das Haus baut.
+- [ ] Das Haus hat gebaut.
+- [ ] Das Haus würde bauen.
+> Werden plus a past participle forms the process passive.
+
+## Which relative pronoun completes "Der Bus, ___ dort steht, ist gelb"?
+- [x] der
+- [ ] den
+- [ ] dem
+- [ ] dessen
+> The relative pronoun is masculine nominative because it is the subject of steht.
+
+## Which verb form completes the polite wish "Ich ___ gern einen Tee"?
+- [x] hätte
+- [ ] hatte
+- [ ] habe gehabt
+- [ ] hat
+> Hätte is a subjunctive form often used for a polite wish.
+
+## Which sentence correctly uses the infinitive with "um ... zu"?
+- [x] Ich lerne, um besser zu sprechen.
+- [ ] Ich lerne, um spreche besser.
+- [ ] Ich lerne, um zu besser spreche.
+- [ ] Ich lerne, um besser sprechen ich.
+> Um ... zu introduces a purpose with an infinitive construction.

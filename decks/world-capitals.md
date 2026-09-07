@@ -1,6 +1,8 @@
 # World capitals
 Some of these are not the biggest city in the country.
 
+<!-- tier: 1 -->
+
 ## What is the capital of Australia?
 - [x] Canberra
 - [ ] Sydney
@@ -203,3 +205,217 @@ Some of these are not the biggest city in the country.
 - [ ] Concepción
 - [ ] La Serena
 > Santiago lies near the Andes.
+
+<!-- tier: 2 -->
+
+## Which city serves as Peru's capital?
+- [x] Lima
+- [ ] Cusco
+- [ ] Arequipa
+- [ ] Trujillo
+> Lima is Peru's capital city.
+
+## Colombia's national capital is which city?
+- [x] Bogotá
+- [ ] Medellín
+- [ ] Cali
+- [ ] Cartagena
+> Bogotá is the seat of Colombia's national government.
+
+## Montevideo is the capital of which country?
+- [x] Uruguay
+- [ ] Paraguay
+- [ ] Bolivia
+- [ ] Ecuador
+> Montevideo is Uruguay's capital.
+
+## Which city is Ecuador's capital?
+- [x] Quito
+- [ ] Guayaquil
+- [ ] Cuenca
+- [ ] Loja
+> Quito is Ecuador's capital city.
+
+## Asunción is the capital of which country?
+- [x] Paraguay
+- [ ] Uruguay
+- [ ] Peru
+- [ ] Chile
+> Asunción is the national capital of Paraguay.
+
+## Which Central American country has San José as its capital?
+- [x] Costa Rica
+- [ ] Nicaragua
+- [ ] Honduras
+- [ ] Guatemala
+> San José is Costa Rica's capital.
+
+## Which city is Panama's national capital?
+- [x] Panama City
+- [ ] Colón
+- [ ] David
+- [ ] Santiago de Veraguas
+> Panama City and the country share the name Panama.
+
+## Which city is Cuba's capital?
+- [x] Havana
+- [ ] Santiago de Cuba
+- [ ] Camagüey
+- [ ] Holguín
+> Havana is Cuba's national capital.
+
+## Kingston is the capital of which Caribbean country?
+- [x] Jamaica
+- [ ] Barbados
+- [ ] Grenada
+- [ ] Dominica
+> Kingston is Jamaica's capital.
+
+## Which city is the capital of Tunisia?
+- [x] Tunis
+- [ ] Sfax
+- [ ] Sousse
+- [ ] Kairouan
+> Tunis is the capital of Tunisia.
+
+## Algiers is the capital of which country?
+- [x] Algeria
+- [ ] Tunisia
+- [ ] Libya
+- [ ] Morocco
+> Algiers is Algeria's national capital.
+
+## Which city is Senegal's capital?
+- [x] Dakar
+- [ ] Saint-Louis
+- [ ] Thiès
+- [ ] Kaolack
+> Dakar is the capital of Senegal.
+
+## Accra is the capital of which country?
+- [x] Ghana
+- [ ] Togo
+- [ ] Benin
+- [ ] Liberia
+> Accra is Ghana's national capital.
+
+## Which city is Uganda's capital?
+- [x] Kampala
+- [ ] Entebbe
+- [ ] Gulu
+- [ ] Jinja
+> Kampala is Uganda's capital city.
+
+## Addis Ababa is the capital of which country?
+- [x] Ethiopia
+- [ ] Eritrea
+- [ ] Somalia
+- [ ] Djibouti
+> Addis Ababa is the capital of Ethiopia.
+
+<!-- tier: 3 -->
+
+## Which capital belongs to Slovenia rather than Slovakia?
+- [x] Ljubljana
+- [ ] Bratislava
+- [ ] Zagreb
+- [ ] Sarajevo
+> Ljubljana is Slovenia's capital; Bratislava is Slovakia's.
+
+## Tallinn is the capital of which Baltic country?
+- [x] Estonia
+- [ ] Latvia
+- [ ] Lithuania
+- [ ] Finland
+> Tallinn is Estonia's national capital.
+
+## Which country has Riga as its capital?
+- [x] Latvia
+- [ ] Lithuania
+- [ ] Estonia
+- [ ] Poland
+> Riga is the capital of Latvia.
+
+## Which city is Lithuania's capital?
+- [x] Vilnius
+- [ ] Kaunas
+- [ ] Klaipėda
+- [ ] Šiauliai
+> Vilnius is Lithuania's national capital.
+
+## Bratislava is the capital of which country?
+- [x] Slovakia
+- [ ] Slovenia
+- [ ] Serbia
+- [ ] Bulgaria
+> Bratislava is the capital of Slovakia.
+
+## Which city is Montenegro's national capital?
+- [x] Podgorica
+- [ ] Kotor
+- [ ] Budva
+- [ ] Bar
+> Podgorica is the capital; Cetinje holds the special title of Old Royal Capital.
+
+## Tirana is the capital of which country?
+- [x] Albania
+- [ ] North Macedonia
+- [ ] Montenegro
+- [ ] Bosnia and Herzegovina
+> Tirana is Albania's capital.
+
+## Which city is North Macedonia's capital?
+- [x] Skopje
+- [ ] Ohrid
+- [ ] Bitola
+- [ ] Tetovo
+> Skopje is the country's national capital.
+
+## Chișinău is the capital of which country?
+- [x] Moldova
+- [ ] Romania
+- [ ] Bulgaria
+- [ ] Georgia
+> Chișinău is Moldova's capital city.
+
+## Which city is the capital of Georgia, the country?
+- [x] Tbilisi
+- [ ] Batumi
+- [ ] Kutaisi
+- [ ] Rustavi
+> Tbilisi is Georgia's capital.
+
+## Yerevan is the capital of which country?
+- [x] Armenia
+- [ ] Georgia
+- [ ] Azerbaijan
+- [ ] Kazakhstan
+> Yerevan is the national capital of Armenia.
+
+## Which country has Bishkek as its capital?
+- [x] Kyrgyzstan
+- [ ] Tajikistan
+- [ ] Uzbekistan
+- [ ] Turkmenistan
+> Bishkek is the capital of Kyrgyzstan.
+
+## Dushanbe is the capital of which Central Asian country?
+- [x] Tajikistan
+- [ ] Kyrgyzstan
+- [ ] Kazakhstan
+- [ ] Uzbekistan
+> Dushanbe is Tajikistan's national capital.
+
+## Which Himalayan kingdom has Thimphu as its capital?
+- [x] Bhutan
+- [ ] Nepal
+- [ ] Thailand
+- [ ] Cambodia
+> Thimphu is Bhutan's capital.
+
+## Vientiane is the capital of which country?
+- [x] Laos
+- [ ] Cambodia
+- [ ] Vietnam
+- [ ] Myanmar
+> Vientiane is the national capital of Laos.

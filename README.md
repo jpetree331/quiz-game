@@ -26,12 +26,12 @@ the end.
 **Retry** — When the round ends, every question you missed can be replayed as a
 short extra round. Keep retrying until there is nothing left to miss.
 
-**Progress** — Each new correct answer earns 10 discovery XP and fills the topic's
+**Progress** — Each new correct answer earns 10, 20, or 30 discovery XP according to its tier and fills the topic's
 collection bar. Progress saves after every answer, including unfinished trips.
 New rounds favor unseen questions, then previously missed ones, then collected ones.
 Answer five questions to complete the small daily goal (based on your device's date).
 
-**Best score** — The best percentage per topic is remembered in the browser.
+**Best score** — The best percentage per topic and tier is remembered in the browser.
 Practice trips do not replace full-trip best scores or add to completed trip counts.
 Existing best scores from the original version are still recognized. No data is sent
 anywhere. If browser storage is blocked or full, a notice explains that progress
@@ -44,8 +44,8 @@ their progress is remembered when the same file and questions are reopened.
   TV remote or a keyboard, no mouse required
 - **Bring your own deck** — open any `.md` file from your device with the file
   picker on the start screen
-- **Six topics, 180 questions** — everyday science, world capitals, nature,
-  space, arts and words, and beginner German; 30 questions per topic
+- **Six topics, 360 questions** — everyday science, world capitals, nature,
+  space, arts and words, and German vocabulary and grammar; 60 questions per topic
 - Warm cream-and-ink design, original SVG bus illustration, colorful topic icons,
   ticket-style round settings, and layouts for phones and larger screens
 - **Quick trip** — starts five questions from a surprise topic in one tap
@@ -67,6 +67,7 @@ nextstop_quiz/
 │   │                   scoring, streaks, retry of missed questions
 │   ├── decks.js        loads bundled decks and user-supplied .md files
 │   ├── main.js         UI controller: rendering, click/keyboard input
+│   ├── tiers.js        route names, rewards, and tier filtering
 │   └── progress.js     persistent topic collections and discovery selection
 ├── decks/
 │   ├── science-basics.md
@@ -79,7 +80,8 @@ nextstop_quiz/
 ├── test/
 │   ├── engine.test.js  engine, parser, and randomized round tests
 │   ├── progress.test.js progress rules and expanded deck checks
-│   └── fixtures/       a small import test deck
+│   ├── tiers.test.js    unlocks, weighted XP, migrations, and backups
+│   └── fixtures/       import deck and progress migration examples
 ├── serve.js            local-only preview server
 ├── package.json        optional npm shortcuts (no dependencies)
 ├── QUESTION-SOURCES.md additions, CC0 scope, and reference notes
@@ -96,10 +98,10 @@ imported and driven from Node or a test suite without a browser.
 
 ```sh
 node serve.js
-# open http://127.0.0.1:8000
+# open http://localhost:8015
 ```
 
-The preview server listens only on this computer. For phone access or a public
+The preview server uses **port 8015** and listens only on this computer. Port 8000 is reserved for another local agent API; do not use it for quiz tests. For phone access or a public
 release, host the app files on a static web host. Any static HTTP server also works.
 
 No `npm install`, no compilation. ES modules and `fetch` require HTTP —
@@ -110,6 +112,26 @@ Run the tests (Node ≥ 18, no flags):
 ```sh
 node --test
 ```
+
+## Routes and saved progress
+
+Each topic now has three routes:
+
+| Tier | Questions per topic | XP per newly collected correct answer | Unlock |
+| --- | ---: | ---: | --- |
+| Curious | 30 | 10 | Available immediately |
+| Explorer | 15 | 20 | Collect 10 Curious answers in this topic |
+| Expert | 15 | 30 | Collect 10 Explorer answers in this topic |
+
+Earlier routes stay playable. Wrong answers do not remove XP. A retry can collect a missed answer at its original reward, but a collected question never pays twice. Best trip scores are tracked separately for each tier. For short imported decks the gate uses the smaller of ten or the preceding tier's question count.
+
+Progress is stored in browser localStorage under the existing key `nextstop:journey:v1`. The payload is now version 2; old version-1 saves migrate automatically and retain their 10-XP awards, questions, best score, daily count, and trips. New tier metadata does not change a question's identity.
+
+Expand **Your progress, to go** to download a JSON backup or restore one. Restore merges collections and retains existing discoveries. Re-importing the same backup adds no XP. Per-topic trip counts and daily counts use the higher count when merging, rather than adding duplicate history; backups are portable saves, not continuous multi-device synchronization.
+
+Browser storage is specific to the site's origin, including its port. A move from localhost:8000 to localhost:8015 shows a separate save; the older origin's data is not erased or automatically accessible from the new port. Clearing site data or using temporary/private browser storage can also remove local saves. Download a backup for portability.
+
+The core game requires no account or application backend. Accounts and public leaderboards are a proposed next phase, documented in [ACCOUNTS.md](ACCOUNTS.md).
 
 ## Deck format
 
@@ -140,6 +162,8 @@ A description line or two. Shown on the start screen.
 | `- [x] …` | The right answer (exactly one per question) |
 | `- [ ] …` | A wrong answer (`*` works too). At least two choices per question. |
 | `> …` | Optional note shown after answering |
+
+Optional tier section markers such as `<!-- tier: 2 -->` apply to subsequent questions. Supported tiers are 1, 2, and 3; an unmarked deck defaults to Curious. Markers remain invisible in rendered Markdown.
 
 The file also reads fine as a checklist in any markdown viewer or editor.
 Broken decks are rejected with a message that names the question.
@@ -180,7 +204,7 @@ into a Capacitor project as the web folder.
   malformed decks (no questions, no answer, two answers, one choice) are rejected
   with a message naming the question
 - every bundled deck parses and has at least ten well-formed questions
-- exactly six registered decks with 30 unique four-choice questions each
+- exactly six registered decks with 60 unique four-choice questions each
 - progress persistence rules, corrupt-data recovery, local-day rollover, shuffled
   question identity, no duplicate XP, and discovery selection priorities
 - rounds never exceed the deck size; shuffled choices keep the right answer text
@@ -196,7 +220,7 @@ into a Capacitor project as the web folder.
 Made by Jess (Culurien) as a sample for the "games for the ride" collection.
 Free to play and to copy. Write decks, share decks.
 
-The 2026-09-07 makeover adds 144 independently written factual questions with
+The 2026-09-07 makeover and tier expansion add 324 independently written factual questions with
 a CC0 dedication scoped to those additions. The supplied archive contains modern
 commercial books and was not used as a question bank. See
 [QUESTION-SOURCES.md](QUESTION-SOURCES.md) for exact scope, references, and limitations.

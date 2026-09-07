@@ -37,6 +37,8 @@
 <div class="journey-stat"><strong id="total-rides">0</strong><span>trips completed</span>
 </div>
 </div>
+<details class="save-tools"><summary>Your progress, to go <span aria-hidden="true">↗</span></summary>
+<div class="save-tools-body"><p>Playing as a guest. Your discoveries save in this browser. Keep a backup to bring them to another browser or device.</p><div class="save-actions"><button id="export-progress" type="button" class="text-button">Download progress ↓</button><button id="import-progress" type="button" class="text-button">Restore a backup ↑</button><input id="progress-file" type="file" accept=".json,application/json" hidden></div><p id="save-status" role="status"></p></div></details>
 <div class="explore-layout">
 <div class="topics">
 <div class="section-heading">
@@ -56,7 +58,11 @@
 <h2 id="selected-title">Finding your next stop…</h2>
 <p id="deck-info">Loading topics…</p>
 <div class="ticket-divider">
-</div><span class="field-label" id="size-label">How long have you got?</span>
+</div>
+<div class="tier-heading"><span class="field-label" id="tier-label">Choose your route</span><span class="tier-heading-hint">LEVEL UP</span></div>
+<div id="tier-list" class="tier-list" role="group" aria-labelledby="tier-label"></div>
+<p id="tier-detail" class="tier-detail"></p><p id="tier-hint" class="tier-hint" aria-live="polite"></p>
+<span class="field-label" id="size-label">How long have you got?</span>
 <div id="size-list" class="segmented" role="group" aria-labelledby="size-label"><button type="button" class="seg" data-size="5" aria-pressed="true"><strong>5</strong><span>Quick</span></button><button type="button" class="seg" data-size="10" aria-pressed="false"><strong>10</strong><span>Classic</span></button><button type="button" class="seg" data-size="15" aria-pressed="false"><strong>15</strong><span>Scenic</span></button>
 </div>
 <p class="time-hint" id="time-hint">5 questions · your own pace</p><button id="start-round" type="button" class="btn primary big" disabled>Let's go <span aria-hidden="true">→</span></button>
@@ -75,7 +81,7 @@
 <p id="storage-warning" class="error-message" role="status" hidden>Browser storage is unavailable. You can still play, but progress will only last for this visit.</p>
 </section>
 <section id="play" class="screen play-screen" aria-label="Quiz round" hidden>
-<div class="play-heading"><button id="quit" type="button" class="text-button">← Back to topics</button><span id="play-topic" class="topic-pill"></span><span class="play-pace">TAKE YOUR TIME</span>
+<div class="play-heading"><button id="quit" type="button" class="text-button">← Back to topics</button><span id="play-topic" class="topic-pill"></span><span id="play-tier" class="play-tier"></span><span class="play-pace">TAKE YOUR TIME</span>
 </div>
 <div class="line-strip" aria-hidden="true">
 <div id="stations" class="stations">
@@ -124,7 +130,8 @@
 </div></dl>
 <p id="best" class="best">
 </p>
-<div class="overlay-actions"><button id="retry" type="button" class="btn primary">Revisit missed questions</button><button id="play-again" type="button" class="btn ink">One more trip →</button><button id="to-menu" type="button" class="text-button">Back to topics</button>
+<p id="tier-unlocked" class="tier-unlocked" hidden></p>
+<div class="overlay-actions"><button id="next-tier" type="button" class="btn primary" hidden></button><button id="retry" type="button" class="btn primary">Revisit missed questions</button><button id="play-again" type="button" class="btn ink">One more trip →</button><button id="to-menu" type="button" class="text-button">Back to topics</button>
 </div>
 </div>
 </div>

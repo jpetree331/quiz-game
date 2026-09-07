@@ -1505,3 +1505,58 @@ footer {
     font-size:24px
   }
 }
+
+/* Routes keep the original ticket palette while making advancement visible. */
+.card-tier {
+  font-size: 10px;
+  color: #536743;
+  font-weight: 650;
+  margin-top: 10px;
+}
+.deck-card { min-height: 225px; }
+.deck-title, .trip-panel h2, .topic-pill { overflow-wrap: anywhere; min-width: 0; }
+.tier-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.tier-heading-hint { font-size: 8px; letter-spacing: 1px; color: var(--muted); }
+.tier-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+.tier-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #fafaf5;
+  padding: 11px 2px;
+}
+.tier-option .tier-number { font-size: 14px; font-family: Georgia, serif; color: #7b708b; }
+.tier-option strong { font-size: 10px; font-weight: 650; }
+.tier-option > span:last-child { font-size: 8px; color: #606558; white-space: nowrap; }
+.tier-option[aria-pressed=true] { background: #eee9f6; border-color: #9888ac; box-shadow: 0 0 0 1px #9888ac; }
+.tier-option:disabled { background: #f1f1eb; color: #707466; border-style: dashed; }
+.tier-option:hover:not(:disabled) { background: #f0edf5; }
+.tier-detail { font-size: 10px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+.tier-hint { font-size: 11px; color: #696078; margin: 6px 0 21px; line-height: 1.55; }
+.play-heading { flex-wrap: wrap; }
+.play-tier { padding: 6px 10px; border-radius: 20px; background: #eee9f6; color: #675878; font-size: 10px; }
+.tier-unlocked { font-size: 12px; line-height: 1.6; padding: 12px; border-radius: 10px; margin: 0 0 17px; color: #665177; background: #eee9f6; }
+.save-tools { margin: -25px 0 31px; }
+.save-tools summary { cursor: pointer; font-size: 11px; color: var(--muted); width: fit-content; padding: 9px 0; }
+.save-tools summary:focus-visible { outline: 3px solid #44715a; outline-offset: 3px; }
+.save-tools summary span { margin-left: 5px; }
+.save-tools-body { max-width: 650px; padding: 17px 20px; background: #eeefe6; border: 1px solid var(--line); border-radius: 12px; margin-top: 5px; }
+.save-tools-body p { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.save-actions { display: flex; gap: 25px; flex-wrap: wrap; margin-top: 6px; }
+#save-status:not(:empty) { border-top: 1px solid var(--line); margin-top: 9px; padding-top: 10px; color: #4e6448; }
+@media(max-width:720px) {
+  .save-tools { margin-top: -16px; margin-bottom: 22px; }
+  .tier-option { flex-direction: row; justify-content: center; flex-wrap: wrap; gap: 8px; padding: 12px 6px; min-height: 65px; }
+  .tier-option > span:last-child { width: 100%; }
+  .tier-option strong { font-size: 12px; }
+  .tier-hint { margin-bottom: 19px; }
+}
+@media(max-width:460px) {
+  .deck-card { min-height: 225px; }
+  .play-tier { margin-left: auto; }
+  .play-heading { row-gap: 7px; }
+  .topic-pill { max-width: 57%; }
+}

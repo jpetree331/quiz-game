@@ -1,9 +1,11 @@
 import { answer, currentQuestion, newRound, next, results, retryRound } from './engine.js';
 import { BUNDLED, loadBundledDeck, loadDeckFile } from './decks.js';
-import { STORAGE_KEY, emptyProgress, decodeProgress, recordAnswer, completeTrip, summary, collectedCount, topicProgress, discoveryDeck, localDate } from './progress.js';
+import { STORAGE_KEY, emptyProgress, decodeProgress, recordAnswer, completeTrip, summary, collectedCount, topicProgress, discoveryDeck, localDate, tierProgress, createBackup, parseBackup, mergeProgress } from './progress.js';
+
+import { tierDeck, tierInfo } from './tiers.js';
 
 const $ = id => document.getElementById(id);
-const app = { decks: new Map(), deckId: BUNDLED[0].file, size: 5, round: null, progress: emptyProgress(), earned: 0, startedAt: 0, retry: false };
+const app = { decks: new Map(), deckId: BUNDLED[0].file, size: 5, tier: 1, newAnswers: 0, unlockedAtStart: [], nextTier: null, round: null, progress: emptyProgress(), earned: 0, startedAt: 0, retry: false };
 const icons = {
   science: '<path d="M9 3h6m-5 0v7L4 20q-1 2 2 2h12q3 0 2-2l-6-10V3M8 15h8"/><circle cx="11" cy="18" r="1"/>',
   globe: '<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 6h14M5 18h14"/>',
@@ -24,7 +26,9 @@ function legacyBest(title) {
   try { const n = Number(localStorage.getItem(`nextstop:best:${title}`)); return Number.isFinite(n) ? Math.min(100, Math.max(0, n)) : 0; }
   catch { return 0; }
 }
-function bestScore() { return Math.max(topicProgress(app.progress, app.deckId).best, legacyBest(currentDeck().title)); }
+function bestScore() { return Math.max(topicProgress(app.progress, app.deckId).bestByTier[app.tier] ?? 0, app.tier === 1 ? legacyBest(currentDeck().title) : 0); }
+const routes = () => currentDeck() ? tierProgress(app.progress, app.deckId, currentDeck()) : [];
+const highestRoute = () => routes().filter(t => t.unlocked).at(-1)?.id ?? 1;
 function renderJourney() {
   const s = summary(app.progress);
   $('total-xp').textContent = s.xp.toLocaleString();
@@ -40,11 +44,12 @@ function renderDeckList() {
   $('deck-list').replaceChildren();
   for (const [id, deck] of app.decks) {
     const meta = metadata(id), n = deck.questions.length, collected = collectedCount(app.progress, id, deck);
+    const unlocked = tierProgress(app.progress, id, deck).filter(t => t.unlocked).at(-1);
     const btn = document.createElement('button');
     btn.type = 'button'; btn.className = 'deck-card'; btn.dataset.id = id;
     btn.style.setProperty('--tint', meta.tint); btn.style.setProperty('--tone', meta.tone);
     btn.setAttribute('aria-pressed', String(id === app.deckId));
-    btn.innerHTML = `<span class="card-top"><span class="topic-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${icons[meta.icon]}</svg></span><span class="selection-dot" aria-hidden="true">✓</span></span><span class="deck-title"></span><span class="deck-description"></span><span class="card-progress"><span class="progress-track" aria-hidden="true"><span style="width:${collected / n * 100}%"></span></span><span class="deck-meta"><span>${n} questions</span><b>${collected}/${n} collected</b></span></span>`;
+    btn.innerHTML = `<span class="card-top"><span class="topic-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${icons[meta.icon]}</svg></span><span class="selection-dot" aria-hidden="true">✓</span></span><span class="deck-title"></span><span class="deck-description"></span><span class="card-tier">${unlocked.name} · ${unlocked.xp} XP</span><span class="card-progress"><span class="progress-track" aria-hidden="true"><span style="width:${collected / n * 100}%"></span></span><span class="deck-meta"><span>${n} questions</span><b>${collected}/${n} collected</b></span></span>`;
     btn.querySelector('.deck-title').textContent = meta.title;
     btn.querySelector('.deck-description').textContent = meta.subtitle;
     btn.addEventListener('click', ev => {
@@ -58,15 +63,32 @@ function renderDeckList() {
   $('topic-count').textContent = `${app.decks.size} topics. Endless little discoveries.`;
   renderJourney();
 }
+function renderTiers() {
+  const available = routes();
+  if (!available.some(t => t.id === app.tier && t.unlocked)) app.tier = highestRoute();
+  $('tier-list').replaceChildren(...available.map(tier => {
+    const button = document.createElement('button');
+    button.type = 'button'; button.className = 'tier-option'; button.dataset.tier = tier.id;
+    button.disabled = !tier.unlocked; button.setAttribute('aria-pressed', String(app.tier === tier.id));
+    button.setAttribute('aria-label', tier.name + ', ' + tier.xp + ' XP per new answer' + (tier.unlocked ? '' : ', locked'));
+    button.innerHTML = '<span class="tier-number" aria-hidden="true">' + ['I','II','III'][tier.id - 1] + '</span><strong>' + tier.name + '</strong><span>' + tier.xp + ' XP' + (tier.unlocked ? '' : ' · locked') + '</span>';
+    button.addEventListener('click', () => { app.tier = tier.id; describeDeck(); $('tier-list').querySelector('[data-tier="' + tier.id + '"]').focus({ preventScroll: true }); });
+    return button;
+  }));
+  const selected = available.find(t => t.id === app.tier), following = available.find(t => t.id > app.tier);
+  $('tier-detail').textContent = selected ? selected.collected + ' / ' + selected.total + ' collected · ' + selected.description : '';
+  $('tier-hint').textContent = following ? following.unlocked ? following.name + ' unlocked. A new route awaits.' : 'Collect ' + following.needed + ' more ' + selected.name + (following.needed === 1 ? ' answer to unlock ' : ' answers to unlock ') + following.name + '.' : selected ? 'Your highest route. Make every discovery count.' : '';
+}
 function describeDeck() {
   const deck = currentDeck();
+  renderTiers();
   $('start-round').disabled = !deck; $('surprise').disabled = !app.decks.size;
   $('selected-title').textContent = deck ? metadata(app.deckId).title : 'No topics available';
   $('deck-info').textContent = deck ? deck.description : 'Import a markdown deck to start a trip.';
-  $('time-hint').textContent = `${Math.min(app.size, deck?.questions.length ?? app.size)} questions · your own pace`;
+  $('time-hint').textContent = `${Math.min(app.size, deck ? tierDeck(deck, app.tier).questions.length : app.size)} questions · your own pace`;
 }
 function selectDeck(id) {
-  app.deckId = id;
+  app.deckId = id; app.tier = highestRoute();
   // Keep the actual focused button in place for keyboard and assistive technology users.
   for (const b of $('deck-list').children) b.setAttribute('aria-pressed', String(b.dataset.id === id));
   describeDeck();
@@ -88,19 +110,23 @@ async function loadBundled() {
     $('load-error').textContent = `Couldn't load: ${failures.join(', ')}. Refresh to try again, or import a deck.`;
     $('load-error').hidden = false;
   }
+  app.tier = highestRoute();
   renderDeckList(); describeDeck();
 }
 function hideOverlay() { $('overlay').hidden = true; $('app').inert = false; document.body.style.overflow = ''; }
 function startRound(round, retry = false) {
   if (!round) return;
-  app.round = round; app.retry = retry; app.earned = 0; app.startedAt = Date.now();
+  app.round = round; app.retry = retry; app.earned = 0; app.newAnswers = 0; app.startedAt = Date.now();
+  app.unlockedAtStart = routes().filter(t => t.unlocked).map(t => t.id);
   hideOverlay(); $('start').hidden = true; $('play').hidden = false;
   $('play-topic').textContent = `${metadata(app.deckId).title}${retry ? ' · Revisit' : ''}`;
+  $('play-tier').textContent = `${tierInfo(app.tier).name} · ${tierInfo(app.tier).xp} XP`;
   render(); window.scrollTo({ top: 0, behavior: 'instant' });
 }
 function beginFromMenu() {
   const deck = currentDeck();
-  if (deck) startRound(newRound(discoveryDeck(deck, app.progress, app.deckId, app.size), { size: app.size }));
+  if (!deck || !routes().some(t => t.id === app.tier && t.unlocked)) return;
+  startRound(newRound(discoveryDeck(tierDeck(deck, app.tier), app.progress, app.deckId, app.size), { size: app.size }));
 }
 function backToMenu() {
   app.round = null; hideOverlay(); $('play').hidden = true; $('start').hidden = false;
@@ -113,8 +139,9 @@ function choose(i) {
   const correct = app.round.answers.at(-1).correct;
   const recorded = recordAnswer(app.progress, app.deckId, q, correct);
   app.progress = recorded.progress; app.earned += recorded.earned;
+  if (recorded.earned) app.newAnswers++;
   saveProgress(); render();
-  if (correct && recorded.earned) $('feedback').textContent += ' +10 discovery XP';
+  if (correct && recorded.earned) $('feedback').textContent += ` +${recorded.earned} discovery XP`;
   $('question').classList.remove('flash-good', 'flash-bad');
   void $('question').offsetWidth;
   $('question').classList.add(correct ? 'flash-good' : 'flash-bad');
@@ -168,20 +195,24 @@ function render() {
 function showOverlay() {
   const r = results(app.round);
   // Revisit rounds earn newly collected answers, but cannot inflate the full-trip best score.
-  if (!app.retry) { app.progress = completeTrip(app.progress, app.deckId, r.pct); saveProgress(); }
+  if (!app.retry) { app.progress = completeTrip(app.progress, app.deckId, r.pct, app.tier); saveProgress(); }
   $('overlay-title').textContent = r.perfect ? 'What a brilliant little trip.' : r.pct >= 60 ? 'Look at you go.' : 'Curiosity looks good on you.';
   $('result-message').textContent = r.perfect ? 'Every stop, a little win. Where to next?' : 'A few new facts to take along for the ride.';
-  $('earned-xp').textContent = app.earned ? `+${app.earned} XP · ${app.earned / 10} new answer${app.earned === 10 ? '' : 's'} collected` : 'Another step along the way.';
+  $('earned-xp').textContent = app.earned ? `+${app.earned} XP · ${app.newAnswers} new answer${app.newAnswers === 1 ? '' : 's'} collected` : 'Another step along the way.';
   $('stat-score').textContent = `${r.score} / ${r.total}`; $('stat-streak').textContent = r.bestStreak;
   const seconds = Math.round((Date.now() - app.startedAt) / 1000);
   $('stat-time').textContent = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
-  $('best').textContent = `Best trip on this topic: ${bestScore()}%${app.retry ? ' · This was a practice trip' : ''}`;
+  $('best').textContent = `Best ${tierInfo(app.tier).name} trip: ${bestScore()}%${app.retry ? ' · This was a practice trip' : ''}`;
   $('retry').hidden = !r.missed.length; $('retry').textContent = `Revisit ${r.missed.length} missed question${r.missed.length === 1 ? '' : 's'} →`;
+  app.nextTier = routes().filter(t => t.unlocked && !app.unlockedAtStart.includes(t.id)).at(-1) ?? null;
+  $('tier-unlocked').hidden = !app.nextTier; $('next-tier').hidden = !app.nextTier;
+  $('tier-unlocked').textContent = app.nextTier ? 'New route unlocked: ' + app.nextTier.name + '. Your next discoveries earn ' + app.nextTier.xp + ' XP each.' : '';
+  $('next-tier').textContent = app.nextTier ? 'Try ' + app.nextTier.name + ' →' : '';
   $('ring-pct').textContent = `${r.pct}%`;
   $('ring-fill').style.strokeDashoffset = String(2 * Math.PI * 52);
   $('overlay').hidden = false; $('app').inert = true; document.body.style.overflow = 'hidden';
   requestAnimationFrame(() => { $('ring-fill').style.strokeDashoffset = String(2 * Math.PI * 52 * (1 - r.pct / 100)); });
-  (r.missed.length ? $('retry') : $('play-again')).focus();
+  (app.nextTier ? $('next-tier') : r.missed.length ? $('retry') : $('play-again')).focus();
 }
 function focusables(container) { return [...container.querySelectorAll('button:not([disabled]),a[href]')].filter(b => b.getClientRects().length); }
 function moveFocus(container, delta) {
@@ -219,6 +250,7 @@ $('start-round').addEventListener('click', beginFromMenu);
 $('surprise').addEventListener('click', () => { const ids = [...app.decks.keys()]; if (!ids.length) return; selectDeck(ids[Math.floor(Math.random() * ids.length)]); selectSize(5); beginFromMenu(); });
 $('next').addEventListener('click', advance); $('quit').addEventListener('click', backToMenu);
 $('retry').addEventListener('click', () => startRound(retryRound(app.round), true));
+$('next-tier').addEventListener('click', () => { if (app.nextTier) { app.tier = app.nextTier.id; beginFromMenu(); } });
 $('play-again').addEventListener('click', beginFromMenu); $('to-menu').addEventListener('click', backToMenu);
 $('journey-link').addEventListener('click', () => { if (app.round) backToMenu(); renderJourney(); $('journey').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'center' }); $('journey').focus({ preventScroll: true }); });
 $('open-file').addEventListener('click', () => $('deck-file').click());
@@ -236,5 +268,23 @@ $('deck-file').addEventListener('change', async () => {
   $('deck-file').value = '';
 });
 // Refresh from other tabs before future interactions, without inventing or overwriting history on load.
-window.addEventListener('storage', ev => { if (ev.key === STORAGE_KEY) { app.progress = decodeProgress(ev.newValue); if (!app.round) renderDeckList(); } });
+window.addEventListener('storage', ev => { if (ev.key === STORAGE_KEY) { app.progress = decodeProgress(ev.newValue); if (!app.round) { renderDeckList(); describeDeck(); } } });
+$('export-progress').addEventListener('click', () => {
+  const url = URL.createObjectURL(new Blob([createBackup(app.progress)], { type: 'application/json' }));
+  const link = document.createElement('a'); link.href = url; link.download = 'nextstop-progress-' + localDate() + '.json';
+  document.body.append(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+  $('save-status').textContent = 'Backup download started. Keep this file somewhere safe.';
+});
+$('import-progress').addEventListener('click', () => $('progress-file').click());
+$('progress-file').addEventListener('change', async () => {
+  const file = $('progress-file').files[0]; if (!file) return;
+  try {
+    if (file.size > 2 * 1024 * 1024) throw new Error('This file is too large. Choose a Next Stop save under 2 MB.');
+    const incoming = parseBackup(await file.text());
+    app.progress = mergeProgress(app.progress, incoming); saveProgress();
+    if (!app.round) { app.tier = highestRoute(); renderDeckList(); describeDeck(); }
+    $('save-status').textContent = 'Progress restored. Your existing discoveries were kept, too.';
+  } catch (err) { $('save-status').textContent = err.message; }
+  $('progress-file').value = '';
+});
 renderJourney(); loadBundled();

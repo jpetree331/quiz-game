@@ -1,6 +1,8 @@
 # Science basics
 Everyday science from the periodic table to the solar system.
 
+<!-- tier: 1 -->
+
 ## What is the chemical symbol for gold?
 - [x] Au
 - [ ] Ag
@@ -207,3 +209,217 @@ Everyday science from the periodic table to the solar system.
 - [ ] Melting
 - [ ] Freezing
 > Dry ice changes directly from solid carbon dioxide to gas.
+
+<!-- tier: 2 -->
+
+## Which calculation gives an object's density?
+- [x] Mass divided by volume
+- [ ] Volume divided by time
+- [ ] Force divided by area
+- [ ] Distance divided by time
+> Density compares how much mass is packed into a given volume.
+
+## Which unit is used for wave frequency?
+- [x] Hertz
+- [ ] Joule
+- [ ] Newton
+- [ ] Pascal
+> One hertz means one cycle per second.
+
+## A car travels 160 km in 2 hours. What is its average speed?
+- [x] 80 km/h
+- [ ] 40 km/h
+- [ ] 160 km/h
+- [ ] 320 km/h
+> Average speed is total distance divided by total time.
+
+## Which type of chemical bond involves atoms sharing electron pairs?
+- [x] Covalent
+- [ ] Ionic
+- [ ] Gravitational
+- [ ] Magnetic
+> Sharing electrons can hold atoms together in a molecule.
+
+## Which structures carry out photosynthesis in plant cells?
+- [x] Chloroplasts
+- [ ] Ribosomes
+- [ ] Lysosomes
+- [ ] Centrioles
+> Chloroplasts contain the light-harvesting machinery used in photosynthesis.
+
+## What is the SI unit of force?
+- [x] Newton
+- [ ] Watt
+- [ ] Joule
+- [ ] Kelvin
+> A newton is the force needed to accelerate a kilogram by one meter per second squared.
+
+## In salt water, which substance is the solvent?
+- [x] Water
+- [ ] Salt
+- [ ] Sodium alone
+- [ ] Chlorine alone
+> The solvent is the substance in which the solute dissolves.
+
+## Which quantity includes both speed and direction?
+- [x] Velocity
+- [ ] Mass
+- [ ] Temperature
+- [ ] Volume
+> Velocity is a vector quantity; speed alone has no direction.
+
+## Which method best separates sand from water without dissolving the sand?
+- [x] Filtration
+- [ ] Melting
+- [ ] Magnetization
+- [ ] Fermentation
+> A filter can retain solid particles while water passes through.
+
+## Why does a metal spoon often feel colder than a wooden spoon at the same room temperature?
+- [x] Metal carries heat away from your hand faster
+- [ ] Metal is always below room temperature
+- [ ] Wood creates heat continuously
+- [ ] Metal has no heat energy
+> Your skin senses the rate of heat transfer, not just the object's temperature.
+
+## What does a barometer measure?
+- [x] Atmospheric pressure
+- [ ] Wind speed
+- [ ] Rainfall depth
+- [ ] Air humidity
+> Air pressure is useful when studying weather systems.
+
+## Which organelle assembles proteins from amino acids?
+- [x] Ribosome
+- [ ] Chloroplast
+- [ ] Vacuole
+- [ ] Cell wall
+> Ribosomes use instructions carried by messenger RNA.
+
+## What does an object's inertia describe?
+- [x] Its resistance to a change in motion
+- [ ] Its electrical charge
+- [ ] Its temperature
+- [ ] Its color
+> An object with greater mass has greater inertia.
+
+## How many milliliters are in 2.5 liters?
+- [x] 2,500
+- [ ] 250
+- [ ] 25,000
+- [ ] 25
+> A liter contains one thousand milliliters.
+
+## Which process releases energy by breaking down glucose in cells?
+- [x] Cellular respiration
+- [ ] Photosynthesis
+- [ ] Pollination
+- [ ] Condensation
+> Cells can transfer some of glucose's stored energy into ATP.
+
+<!-- tier: 3 -->
+
+## Two atoms of the same element have different numbers of neutrons. What are they?
+- [x] Isotopes
+- [ ] Ions of different elements
+- [ ] Isobars only
+- [ ] Different molecules
+> Isotopes share a proton count but differ in neutron count.
+
+## What Celsius temperature corresponds to absolute zero?
+- [x] −273.15 °C
+- [ ] −100 °C
+- [ ] 0 °C
+- [ ] −373.15 °C
+> Absolute zero is zero kelvin.
+
+## Approximately how many specified particles are in one mole?
+- [x] 6.022 × 10²³
+- [ ] 3.00 × 10⁸
+- [ ] 9.81 × 10²
+- [ ] 1.602 × 10⁻¹⁹
+> The mole is defined using the Avogadro constant.
+
+## A 6-ohm resistor carries 2 amperes. What voltage is across it?
+- [x] 12 volts
+- [ ] 3 volts
+- [ ] 8 volts
+- [ ] 24 volts
+> Ohm's law gives voltage as current multiplied by resistance.
+
+## If an object's speed doubles while its mass stays fixed, what happens to its classical kinetic energy?
+- [x] It becomes four times as large
+- [ ] It doubles
+- [ ] It halves
+- [ ] It stays the same
+> Kinetic energy is proportional to speed squared.
+
+## For a fixed net force, doubling an object's mass does what to its acceleration?
+- [x] Halves it
+- [ ] Doubles it
+- [ ] Quadruples it
+- [ ] Leaves it unchanged
+> Newton's second law gives acceleration as net force divided by mass.
+
+## What happens to equivalent resistance when an identical resistor is added in parallel to one resistor?
+- [x] It halves
+- [ ] It doubles
+- [ ] It becomes zero
+- [ ] It stays the same
+> Two identical parallel paths carry more current at the same voltage.
+
+## What is the SI unit of pressure?
+- [x] Pascal
+- [ ] Coulomb
+- [ ] Tesla
+- [ ] Watt
+> One pascal is one newton per square meter.
+
+## Compared with pH 5, pH 3 represents roughly how many times the hydrogen-ion activity?
+- [x] 100 times
+- [ ] 2 times
+- [ ] 10 times
+- [ ] 1,000 times
+> Each decrease of one pH unit represents a tenfold increase.
+
+## How does a catalyst increase a reaction's rate?
+- [x] It provides a pathway with lower activation energy
+- [ ] It raises the equilibrium constant
+- [ ] It must be consumed permanently
+- [ ] It changes the elements present
+> A catalyst speeds the approach to equilibrium without changing its position.
+
+## What is diffraction?
+- [x] Waves spreading around edges or through openings
+- [ ] Light bouncing from a mirror
+- [ ] Liquid becoming gas
+- [ ] Electrons moving through a wire
+> Diffraction is particularly noticeable when an opening is comparable to the wavelength.
+
+## Which quantity is conserved in a collision when no net external force acts on the system?
+- [x] Total momentum
+- [ ] Each object's speed
+- [ ] Each object's kinetic energy
+- [ ] Each object's direction
+> Momentum can transfer between objects while the system's total remains constant.
+
+## An isothermal process keeps which quantity constant?
+- [x] Temperature
+- [ ] Pressure
+- [ ] Volume
+- [ ] Mass density
+> Iso- means equal, and thermal refers to temperature.
+
+## Which particle determines an atom's atomic number?
+- [x] Proton
+- [ ] Neutron
+- [ ] Electron
+- [ ] Photon
+> The number of protons identifies the chemical element.
+
+## Which statement describes Newton's third law?
+- [x] Interacting bodies exert equal and opposite forces on each other
+- [ ] Every moving object needs a forward force
+- [ ] Force always equals velocity
+- [ ] Heavier objects always fall faster
+> The two forces act on different bodies, so they do not cancel on a single body.

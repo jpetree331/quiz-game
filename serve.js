@@ -4,6 +4,8 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = path.dirname(fileURLToPath(import.meta.url));
+// Port 8000 belongs to another local agent's API. Keep quiz previews on 8015.
+const port = Number(process.env.NEXTSTOP_PORT || 8015);
 const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.svg': 'image/svg+xml', '.md': 'text/plain' };
 http.createServer(async (req, res) => {
   try {
@@ -17,4 +19,4 @@ http.createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': (types[path.extname(file)] || 'application/octet-stream') + '; charset=utf-8', 'Cache-Control': 'no-store' });
     res.end(data);
   } catch { res.writeHead(404).end('Not found'); }
-}).listen(8000, '127.0.0.1', () => console.log('Next Stop: http://127.0.0.1:8000'));
+}).listen(port, '127.0.0.1', () => console.log(`Next Stop: http://localhost:${port}`));
