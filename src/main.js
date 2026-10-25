@@ -196,6 +196,9 @@ function showOverlay() {
   const r = results(app.round);
   // Revisit rounds earn newly collected answers, but cannot inflate the full-trip best score.
   if (!app.retry) { app.progress = completeTrip(app.progress, app.deckId, r.pct, app.tier); saveProgress(); }
+  // Game Shelf leaderboard: lifetime discovery XP, posted after full trips only.
+  const totalXp = summary(app.progress).xp;
+  if (!app.retry && totalXp > 0) window.ShelfScores?.submit({ board: 'xp', label: 'Discovery XP', value: totalXp });
   $('overlay-title').textContent = r.perfect ? 'What a brilliant little trip.' : r.pct >= 60 ? 'Look at you go.' : 'Curiosity looks good on you.';
   $('result-message').textContent = r.perfect ? 'Every stop, a little win. Where to next?' : 'A few new facts to take along for the ride.';
   $('earned-xp').textContent = app.earned ? `+${app.earned} XP · ${app.newAnswers} new answer${app.newAnswers === 1 ? '' : 's'} collected` : 'Another step along the way.';
