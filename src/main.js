@@ -196,9 +196,15 @@ function showOverlay() {
   const r = results(app.round);
   // Revisit rounds earn newly collected answers, but cannot inflate the full-trip best score.
   if (!app.retry) { app.progress = completeTrip(app.progress, app.deckId, r.pct, app.tier); saveProgress(); }
-  // Game Shelf leaderboard: lifetime discovery XP, posted after full trips only.
+  // Game Shelf leaderboard, full trips only: lifetime discovery XP, then this
+  // trip's percent correct on its topic and route (built-in topics only, so
+  // imported decks can't create boards).
   const totalXp = summary(app.progress).xp;
   if (!app.retry && totalXp > 0) window.ShelfScores?.submit({ board: 'xp', label: 'Discovery XP', value: totalXp });
+  const bundled = BUNDLED.find(d => d.file === app.deckId);
+  if (!app.retry && bundled && r.pct > 0) {
+    window.ShelfScores?.submit({ board: `trip-${bundled.file.replace(/\.md$/, '')}-t${app.tier}`, label: `${bundled.title} · ${tierInfo(app.tier).name}`, value: r.pct });
+  }
   $('overlay-title').textContent = r.perfect ? 'What a brilliant little trip.' : r.pct >= 60 ? 'Look at you go.' : 'Curiosity looks good on you.';
   $('result-message').textContent = r.perfect ? 'Every stop, a little win. Where to next?' : 'A few new facts to take along for the ride.';
   $('earned-xp').textContent = app.earned ? `+${app.earned} XP · ${app.newAnswers} new answer${app.newAnswers === 1 ? '' : 's'} collected` : 'Another step along the way.';
